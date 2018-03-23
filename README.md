@@ -3,7 +3,7 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 
 | category | D | nim | 1 for D, -1 for nim
 | --- | --- | --- | --- |
-| CTFE |  | docs seem to say nim can only use CTFE (via 'const') on functions 'without side-effects' | -1 |
+| CTFE | FFI Works in CTFE | docs seem to say nim can only use CTFE (via 'const') on functions 'without side-effects' but FFI doesn't work in compile time | 1 |
 | - |  | allows filesystem access CHECKME | -1 |
 | **syntax** |
 | allows local imports | yes | | 1 |
@@ -32,7 +32,7 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | packages | dub: https://code.dlang.org/ | nimble: https://nimble.directory/packages.xml | 0 |
 | number of packages | 1247 | 194 | 1 |
 | **implementation** |
-| GC | single shared memory heap that is controlled by its GC | much better GC implementation for soft real-time applications because it can be paused ; Thread local heaps | -1 |
+| GC | single shared memory heap that is controlled by its GC, thread safe | much better GC implementation for soft real-time applications because it can be paused ; Thread local heaps. Default GC is not thread safe. Otherwise use bdwgc | 0 |
 | compile speed | faster (via dmd) CHECKME | | 1 |
 | runtime performance | ? | ? | 0 |
 | binary sizes produced |  | produces smaller binaries | -1 |
@@ -48,7 +48,7 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 
 ## differences (not clear if pro or con)
 * nim has head immutability unlike D: http://nim-by-example.github.io/types/objects/
-* Indentation based syntax
+* Indentation based syntax, but supports syntax skins
 
 ## map of corresponding features
 * static if => when
