@@ -30,6 +30,9 @@ proc remove*[T](L: var DoublyLinkedRing[T], n: DoublyLinkedNode[T]) =
 ```
 generating https://nim-lang.org/docs/lists.html
 
+## similar code comparison
+* https://github.com/logicchains/LPATHBench/blob/master/d.d vs https://github.com/logicchains/LPATHBench/blob/master/nim.nim
+
 
 ## differences (not clear if pro or con)
 nim has head immutability unlike D: http://nim-by-example.github.io/types/objects/
