@@ -7,6 +7,7 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | - |  | allows filesystem access CHECKME | -1 |
 | **syntax** |
 | allows local imports | yes | | 1 |
+| familirity | C-like | python-like | 0 |
 | interpolated strings |  | yes | -1 |
 | style | official D style guide is bad, not standard, takes too much vertical whitespace (eg braces on their own line) | | 1 |
 | **language** |
@@ -23,7 +24,7 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | ranges | D ranges are faster than nim's iterators CHECKME |  | 1 |
 | - |  | nim's iterators are easier to write | -1 |
 | **ecosystem** |
-| contributing | PR's languish forever | PR's get merged way faster in nim (see https://github.com/nim-lang/Nim/pulls vs https://github.com/dlang/dmd/pulls or phobos etc) | -1 |
+| contributing | PR's languish forever | PR's get merged way faster in nim (see https://github.com/nim-lang/Nim/pulls vs https://github.com/dlang/dmd/pulls or phobos etc); QUOTE: Nim is magnitudes of orders easier to contribute to. Not only the compiler code is easier to reason about (at least for me), but PRs are accepted a lot more willingly. I bet such openness of the core devs makes Nim evolution faster and I hope it's gonna stay that way no matter 1.0. | -1 |
 | repo split | dmd,druntime,phobos | single repo for compiler + stdlib making synchronization easier | -1 |
 | github history | highly intertwined (uses merges) | almost linear (guessing it rebases) | -1 |
 | issue tracker | bugzilla (issues.dlang.org) | github issues (https://github.com/nim-lang/Nim/issues) | -1 |
