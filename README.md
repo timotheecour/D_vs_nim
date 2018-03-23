@@ -15,7 +15,6 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | **maturity** |
 | stability | few breaking changes in each release | pre 1.0, new releases often make lots of break changes | 1 |
 | community | larger |  | 1 |
-| packages | dub: has more | nimble | 1 |
 | **interop** |
 | C++ | Calpypso (ldc fork) allows direct C++ integration |  | 1 |
 | C++ |  | C/C++ code generation giving us much better interop than what D offers. Case in point: Converting to cstring doesn't require an allocation and copy | -1 |
@@ -29,11 +28,15 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | github history | highly intertwined (uses merges) | almost linear (guessing it rebases) | -1 |
 | issue tracker | bugzilla (issues.dlang.org) | github issues (https://github.com/nim-lang/Nim/issues) | -1 |
 | open bugs | 4563 (https://dlang.org/bugstats.html)  | 1230 https://github.com/nim-lang/Nim/issues | -1 |
+| **packages** |
+| packages | dub: https://code.dlang.org/ | nimble: https://nimble.directory/packages.xml | 0 |
+| number of packages | 1247 | 194 | 1 |
 | **implementation** |
 | GC | single shared memory heap that is controlled by its GC | much better GC implementation for soft real-time applications because it can be paused ; Thread local heaps | -1 |
 | compile speed | faster (via dmd) CHECKME | | 1 |
 | runtime performance | ? | ? | 0 |
 | binary sizes produced |  | produces smaller binaries | -1 |
+| shared library support | linux:OK; OSX: ldc (not dmd); windows: not OK(CHECKME) ; | ? | ? |
 | **doc** |
 | builtin doc | ddoc (noisy and nonstandard) | markdown eg `  ## removes `n` from `L`. Efficiency: O(1).` (eg: https://nim-lang.org/docs/lists.html) | -1 |
 | **metaprogramming** |
@@ -65,7 +68,13 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 * how to specify immutable inside `for(foo in bar)` ?
 * does it have dfmt equivalent?
 * has REPL?
-* are there real immutable variables in nim ? eg can we modify a slice of an immutable array declared by 'let'?
+* can we modify a slice of an immutable array declared by 'let'?
+* how to use global variables? (cf http://gradha.github.io/articles/2015/02/goodbye-nim-and-good-luck.html)
+* rdmd equivalent?
+
+## nim questions (answered)
+* are there real immutable variables in nim ?
+A:https://www.reddit.com/r/nim/comments/2w32oi/immutability_in_nim/
 
 ## no longer valid points
 https://forum.nim-lang.org/t/1779/1#11314 => dmd backend license was changed recently
