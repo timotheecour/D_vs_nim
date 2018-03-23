@@ -7,11 +7,13 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | - |  | allows filesystem access CHECKME | -1 |
 | **syntax** |
 | allows local imports | yes | | 1 |
+| mutually recursive imports | yes | ? |  |
 | familirity | C-like | python-like | 0 |
 | interpolated strings |  | yes | -1 |
 | style | official D style guide is bad, not standard, takes too much vertical whitespace (eg braces on their own line) | | 1 |
 | **language** |
 | Distinction between traced and untraced pointers |  | yes | -1 |
+| **debugging** |
 | **maturity** |
 | stability | few breaking changes in each release | pre 1.0, new releases often make lots of break changes | 1 |
 | community | larger |  | 1 |
@@ -51,7 +53,8 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 * Indentation based syntax, but supports syntax skins
 
 ## map of corresponding features
-* static if => when
+| category | D | nim | 
+|  | static if | when |
 
 ## links
 * https://www.slant.co/versus/118/395/~d_vs_nim
