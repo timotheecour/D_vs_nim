@@ -20,6 +20,16 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 * fewer open bugs: D shows 4563 open bugs (https://dlang.org/bugstats.html) vs 1230 for nim
 * nim has a much better GC implementation for soft real-time applications because it can be paused.
 * can compile to js
+* official D style guide is bad, not standard, takes too much vertical whitespace
+* nim has AST macros
+* nim has interpolated strings
+* nim builtin doc (which looks like markdown) better than ddoc (which is noisy and nonstandard), eg:
+```
+proc remove*[T](L: var DoublyLinkedRing[T], n: DoublyLinkedNode[T]) =
+  ## removes `n` from `L`. Efficiency: O(1).
+```
+generating https://nim-lang.org/docs/lists.html
+
 
 ## differences (not clear if pro or con)
 nim has head immutability unlike D: http://nim-by-example.github.io/types/objects/
@@ -37,3 +47,7 @@ nim has head immutability unlike D: http://nim-by-example.github.io/types/object
 
 ## scratch
 * makes some common idioms in D first-class citizens.   For example, imperative type declarations are first-class citizens so all the boiler plate around "if (isInputRange!(R))" type stuff goes away in Nim
+
+## nim questions
+* how to specify immutable inside `for(foo in bar)` ?
+* does it have dfmt equivalent?
