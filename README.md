@@ -59,11 +59,14 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | category | D | nim | 
 | --- | --- | --- |
 | **syntax** |
+|  | ++ | +=1 |
 |  | static if | when |
+|  | auto a=foo | var a=foo |
 |  | immutable foo=bar; | let foo=bar; |
-|  | enum foo=bar; | const foo=bar; |
+|  | enum foo=bar | const foo=bar |
 | nesting block comments | /++/ | #[ ]# |
 | sring import | import("foo"); requires `-J` for security | staticRead("foo") |
+| file | __FILE__ | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
 | **library** |
 | **tools** |
 | find declaration | dscanner --declaration | ? |
@@ -87,6 +90,7 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 * can we modify a slice of an immutable array declared by 'let'?
 * how to use global variables? (cf http://gradha.github.io/articles/2015/02/goodbye-nim-and-good-luck.html)
 * rdmd equivalent?
+* how to search for symbols `fooBar` given that nim allows foobar fooBar foo_bar etc?
 
 ## nim questions (answered)
 * are there real immutable variables in nim ?
