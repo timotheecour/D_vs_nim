@@ -3,6 +3,7 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 
 | category | D | nim | 1 for D, -1 for nim
 | --- | --- | --- | --- |
+| **CTFE** |
 | FFI during CTFE | no | no | 0 |
 | can print during CTFE | no | yes; allows filesystem access CHECKME;  | -1 |
 | other CTFE limitations | ? | docs seem to say nim can only use CTFE on functions 'without side-effects' | ? |
@@ -56,7 +57,11 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 
 ## map of corresponding features
 | category | D | nim | 
+| --- | --- | --- |
 |  | static if | when |
+|  | immutable foo=bar; | let foo=bar; |
+|  | enum foo=bar; | const foo=bar; |
+| nesting block comments | /++/ | #[ ]# |
 
 ## links
 * https://www.slant.co/versus/118/395/~d_vs_nim
