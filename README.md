@@ -12,7 +12,7 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | mutually recursive imports | yes | no, compile-time error. you can use forward declaration and/or "mixin foosymbol" to tell the compiler that a symbol will be visible at one point. | 1 |
 | familiarity | C-like | C or Python-like | 0 |
 | interpolated strings |  | yes | -1 |
-| style | official D style guide is bad, not standard, takes too much vertical whitespace (eg braces on their own line) | [Nim Enhancement Proposal #1](https://nim-lang.org/docs/nep1.html) | 0 |
+| style | (subjective opinion) official D style guide is controversial, not standard, takes too much vertical whitespace (eg braces on their own line) | [Nim Enhancement Proposal #1](https://nim-lang.org/docs/nep1.html) | 0 |
 | **language** |
 | Distinction between traced and untraced pointers |  | yes | -1 |
 | **debugging** |
