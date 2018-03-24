@@ -5,8 +5,8 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | --- | --- | --- | --- |
 | **CTFE** |
 | FFI during CTFE | no | no | 0 |
-| can print during CTFE | no | yes; allows filesystem access CHECKME;  | -1 |
-| other CTFE limitations | ? | docs seem to say nim can only use CTFE on functions 'without side-effects' | ? |
+| can print during CTFE | no | yes; allows filesystem access via staticRead and staticExec;  | -1 |
+| other CTFE limitations | ? | no heap-allocated runtime type at compile-time. Heap allocated compile-time variables are turned into immutable static/const at runtime. | ? |
 | **syntax** |
 | optional parens | yes | no | ? |
 | allows local imports | yes | | 1 |
