@@ -37,11 +37,11 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | packages | dub: https://code.dlang.org/ | nimble: https://nimble.directory/packages.xml | 0 |
 | number of packages | 1247 | 639 | 1 |
 | **implementation** |
-| GC | single shared memory heap that is controlled by its GC, thread safe | much better GC implementation for soft real-time applications because it can be paused ; Thread local heaps. Default GC is not thread safe. Otherwise use bdwgc | 0 |
+| GC | single shared memory heap that is controlled by its GC, thread safe | much better GC implementation for soft real-time applications because it can be paused or the max pause can be tuned; Thread local heaps. Default GC is not thread safe. GC implementation can be switched at compile-time between deferred reference counting with cycle detection (default), mark and sweep, boehm or no GC (memory regions). Untraced heap-allocated manually managed objects are available | -1 |
 | compile speed | faster (via dmd) CHECKME | | 1 |
 | runtime performance | ? | ? | 0 |
 | binary sizes produced |  | produces smaller binaries | -1 |
-| shared library support | linux:OK; OSX: ldc (not dmd); windows: not OK(CHECKME) ; | ? | ? |
+| shared library support | linux:OK; OSX: ldc (not dmd); windows: not OK(CHECKME) ; | anything that can be linked from C | -1 |
 | **doc** |
 | builtin doc | ddoc (noisy and nonstandard) | markdown eg `  ## removes `n` from `L`. Efficiency: O(1).` (eg: https://nim-lang.org/docs/lists.html) | -1 |
 | **metaprogramming** |
