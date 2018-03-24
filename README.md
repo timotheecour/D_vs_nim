@@ -8,7 +8,6 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | can print during CTFE | no | yes; allows filesystem access via staticRead and staticExec;  | -1 |
 | other CTFE limitations | ? | no heap-allocated runtime type at compile-time. Heap allocated compile-time variables are turned into immutable static/const at runtime. | ? |
 | **syntax** |
-| optional parens | yes | no | ? |
 | allows local imports | yes | | 1 |
 | mutually recursive imports | yes | no, compile-time error. you can use forward declaration and/or "mixin foosymbol" to tell the compiler that a symbol will be visible at one point. | 1 |
 | familiarity | C-like | C or Python-like | 0 |
@@ -60,6 +59,8 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | --- | --- | --- |
 | **syntax** |
 | UFCS | foo(a, b), a.foo(b) | foo(a, b), a.foo(b), a.foo b, foo a b |
+| expr without parenthesis | `auto a=fun;` calls `fun` | `var a=fun` returns `fun` |
+| UFCS expr without parenthesis | `auto a=b.fun;` calls `fun` | `var a=b.fun` calls `fun` |
 | increment | i++ | i+=1 or inc(i) |
 | concatenation | ~ | & |
 | compile time if | static if | when |
