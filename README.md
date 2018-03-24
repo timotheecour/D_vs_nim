@@ -58,10 +58,17 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 ## map of corresponding features
 | category | D | nim | 
 | --- | --- | --- |
+| **syntax** |
 |  | static if | when |
 |  | immutable foo=bar; | let foo=bar; |
 |  | enum foo=bar; | const foo=bar; |
 | nesting block comments | /++/ | #[ ]# |
+| sring import | import("foo"); requires `-J` for security | staticRead("foo") |
+| **library** |
+|  | splitLines | splitlines |
+| **tools** |
+| find declaration | dscanner --declaration | ? |
+| format code | dfmt --inplace | ? |
 
 ## links
 * https://www.slant.co/versus/118/395/~d_vs_nim
