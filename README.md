@@ -3,6 +3,8 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 
 | category | D | nim | 1 for D, -1 for nim
 | --- | --- | --- | --- |
+| **UFCS** |
+| UFCS supported everywhere | not everywhere, eg: mixin(expr), typeof(expr) | yes | -1 |
 | **CTFE** |
 | FFI during CTFE | no | no | 0 |
 | can print during CTFE | no | yes; allows filesystem access via staticRead and staticExec;  | -1 |
@@ -58,18 +60,22 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | category | D | nim | 
 | --- | --- | --- |
 | **syntax** |
+| string mixin | `mixin("1+1")` | `stringMixinLikeInD("1+1")` with: `macro stringMixinLikeInD(s: static[string]): untyped = parseStmt(s)` source: https://forum.nim-lang.org/t/1779/2#19060 |
+| WISYWIG string | \`foo\nbar\` | """foo\nbar""" |
 | UFCS | foo(a, b), a.foo(b) | foo(a, b), a.foo(b), a.foo b, foo a b |
 | expr without parenthesis | `auto a=fun;` calls `fun` | `var a=fun` returns `fun` |
 | UFCS expr without parenthesis | `auto a=b.fun;` calls `fun` | `var a=b.fun` calls `fun` |
 | increment | i++ | i+=1 or inc(i) |
 | concatenation | ~ | & |
+| type name | T.stringof (builtin) | T.name (import typetraits) |
+| type of | typeof(expr) | expr.type |
 | compile time if | static if | when |
 | variable decl | auto a=foo | var a=foo |
 | immutable decl | immutable foo=bar; | let foo=bar; |
 | compile time decl | enum foo=bar | const foo=bar |
 | nesting block comments | /++/ | #[ ]# |
 | sring import | import("foo"); requires `-J` for security | staticRead("foo") |
-| file | __FILE__ | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
+| file | `__FILE__` | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
 | **library** |
 | **tools** |
 | find declaration | dscanner --declaration | ? |
