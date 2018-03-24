@@ -34,7 +34,7 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | issue tracker | bugzilla (issues.dlang.org) | github issues (https://github.com/nim-lang/Nim/issues) | -1 |
 | open bugs | 4563 (https://dlang.org/bugstats.html)  | 1230 https://github.com/nim-lang/Nim/issues | -1 |
 | **packages** |
-| packages | dub: https://code.dlang.org/ | nimble: https://nimble.directory/packages.xml | 0 |
+| packages | dub: https://code.dlang.org/ | nimble: https://nimble.directory/packages.xml and https://github.com/nim-lang/packages | 0 |
 | number of packages | 1247 | 639 | 1 |
 | **implementation** |
 | GC | single shared memory heap that is controlled by its GC, thread safe | much better GC implementation for soft real-time applications because it can be paused or the max pause can be tuned; Thread local heaps. Default GC is not thread safe. GC implementation can be switched at compile-time between deferred reference counting with cycle detection (default), mark and sweep, boehm or no GC (memory regions). Untraced heap-allocated manually managed objects are available | -1 |
@@ -59,11 +59,13 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | category | D | nim | 
 | --- | --- | --- |
 | **syntax** |
-|  | i++ | i+=1 or inc(i) |
-|  | static if | when |
-|  | auto a=foo | var a=foo |
-|  | immutable foo=bar; | let foo=bar; |
-|  | enum foo=bar | const foo=bar |
+| UFCS | foo(a, b), a.foo(b) | foo(a, b), a.foo(b), a.foo b, foo a b |
+| increment | i++ | i+=1 or inc(i) |
+| concatenation | ~ | & |
+| compile time if | static if | when |
+| variable decl | auto a=foo | var a=foo |
+| immutable decl | immutable foo=bar; | let foo=bar; |
+| compile time decl | enum foo=bar | const foo=bar |
 | nesting block comments | /++/ | #[ ]# |
 | sring import | import("foo"); requires `-J` for security | staticRead("foo") |
 | file | __FILE__ | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
