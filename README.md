@@ -3,9 +3,11 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 
 | category | D | nim | 1 for D, -1 for nim
 | --- | --- | --- | --- |
-| CTFE | FFI Works in CTFE | docs seem to say nim can only use CTFE (via 'const') on functions 'without side-effects' but FFI doesn't work in compile time | 1 |
-| - |  | allows filesystem access CHECKME | -1 |
+| FFI during CTFE | no | no | 0 |
+| can print during CTFE | no | yes; allows filesystem access CHECKME;  | -1 |
+| other CTFE limitations | ? | docs seem to say nim can only use CTFE on functions 'without side-effects' | ? |
 | **syntax** |
+| optional parens | yes | no | ? |
 | allows local imports | yes | | 1 |
 | mutually recursive imports | yes | ? |  |
 | familirity | C-like | python-like | 0 |
