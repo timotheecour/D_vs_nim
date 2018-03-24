@@ -10,10 +10,10 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | **syntax** |
 | optional parens | yes | no | ? |
 | allows local imports | yes | | 1 |
-| mutually recursive imports | yes | ? |  |
-| familirity | C-like | python-like | 0 |
+| mutually recursive imports | yes | no, compile-time error. you can use forward declaration and/or "mixin foosymbol" to tell the compiler that a symbol will be visible at one point. | 1 |
+| familiarity | C-like | C or Python-like | 0 |
 | interpolated strings |  | yes | -1 |
-| style | official D style guide is bad, not standard, takes too much vertical whitespace (eg braces on their own line) | | 1 |
+| style | official D style guide is bad, not standard, takes too much vertical whitespace (eg braces on their own line) | [Nim Enhancement Proposal #1](https://nim-lang.org/docs/nep1.html) | 0 |
 | **language** |
 | Distinction between traced and untraced pointers |  | yes | -1 |
 | **debugging** |
