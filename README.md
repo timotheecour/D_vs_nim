@@ -35,7 +35,7 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | open bugs | 4563 (https://dlang.org/bugstats.html)  | 1230 https://github.com/nim-lang/Nim/issues | -1 |
 | **packages** |
 | packages | dub: https://code.dlang.org/ | nimble: https://nimble.directory/packages.xml | 0 |
-| number of packages | 1247 | 194 | 1 |
+| number of packages | 1247 | 639 | 1 |
 | **implementation** |
 | GC | single shared memory heap that is controlled by its GC, thread safe | much better GC implementation for soft real-time applications because it can be paused ; Thread local heaps. Default GC is not thread safe. Otherwise use bdwgc | 0 |
 | compile speed | faster (via dmd) CHECKME | | 1 |
