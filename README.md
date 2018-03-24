@@ -59,7 +59,7 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | category | D | nim | 
 | --- | --- | --- |
 | **syntax** |
-|  | ++ | +=1 |
+|  | i++ | i+=1 or inc(i) |
 |  | static if | when |
 |  | auto a=foo | var a=foo |
 |  | immutable foo=bar; | let foo=bar; |
