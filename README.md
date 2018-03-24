@@ -65,7 +65,6 @@ Goal: up to date comparison of features between D and nim. PR's welcome!
 | nesting block comments | /++/ | #[ ]# |
 | sring import | import("foo"); requires `-J` for security | staticRead("foo") |
 | **library** |
-|  | splitLines | splitlines |
 | **tools** |
 | find declaration | dscanner --declaration | ? |
 | format code | dfmt --inplace | ? |
