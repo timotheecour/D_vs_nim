@@ -54,7 +54,7 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 
 ## similar code comparison
 * https://github.com/logicchains/LPATHBench/blob/master/d.d vs https://github.com/logicchains/LPATHBench/blob/master/nim.nim
-
+* https://github.com/euantorano/faster-command-line-tools-in-nim/blob/master/D/csv_test.d vs https://github.com/euantorano/faster-command-line-tools-in-nim/blob/master/Nim/csv_test.nim
 
 ## differences (not clear if pro or con)
 * nim has head immutability unlike D: http://nim-by-example.github.io/types/objects/
