@@ -40,6 +40,7 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 | number of packages | 1247 | 639 | 1 |
 | **tooling** |
 | format code | `dfmt --inplace` | no | 1 |
+| REPL | https://github.com/dlang-community/drepl ; https://github.com/callumenator/dabble |  unofficially, you can use `nim secret` but it does not support a lot of things. The most promising is [nrpl](https://github.com/wheineman/nrpl) | ? |
 | **implementation** |
 | GC | single shared memory heap that is controlled by its GC, thread safe | much better GC implementation for soft real-time applications because it can be paused or the max pause can be tuned; Thread local heaps. Default GC is not thread safe. GC implementation can be switched at compile-time between deferred reference counting with cycle detection (default), mark and sweep, boehm or no GC (memory regions). Untraced heap-allocated manually managed objects are available | -1 |
 | compile speed | faster (via dmd) CHECKME | | 1 |
@@ -97,7 +98,6 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 ## nim questions
 * how to specify immutable inside `for(foo in bar)` ?
 * does it have dfmt equivalent?
-* has REPL?
 * can we modify a slice of an immutable array declared by 'let'?
 * how to use global variables? (cf http://gradha.github.io/articles/2015/02/goodbye-nim-and-good-luck.html)
 * rdmd equivalent?
