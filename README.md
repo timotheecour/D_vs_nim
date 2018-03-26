@@ -53,8 +53,11 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 | macro | no | hygienic macro system instead of string mixin; string mixin are available through `parseStmt`. The macros modify directly the abstract syntax tree given by the parser, before the compiler pass. It is possible to implement new DSLs or even a new language with a syntax different from Nim based on the macro system: example Smalltalk-like language (Spry)[http://sprylang.org/]| -1 |
 
 ## similar code comparison
-* https://github.com/logicchains/LPATHBench/blob/master/d.d vs https://github.com/logicchains/LPATHBench/blob/master/nim.nim
-* https://github.com/euantorano/faster-command-line-tools-in-nim/blob/master/D/csv_test.d vs https://github.com/euantorano/faster-command-line-tools-in-nim/blob/master/Nim/csv_test.nim
+
+| category | D | nim | 
+| --- | --- | --- |
+| longest path | https://github.com/logicchains/LPATHBench/blob/master/d.d  | https://github.com/logicchains/LPATHBench/blob/master/nim.nim |
+| csv test | https://github.com/euantorano/faster-command-line-tools-in-nim/blob/master/D/csv_test.d | https://github.com/euantorano/faster-command-line-tools-in-nim/blob/master/Nim/csv_test.nim |
 
 ## differences (not clear if pro or con)
 * nim has head immutability unlike D: http://nim-by-example.github.io/types/objects/
