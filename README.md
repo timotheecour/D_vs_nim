@@ -11,6 +11,8 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 | FFI during CTFE | no | no | 0 |
 | can read/write/exec during CTFE | read only (string import) | yes; allows filesystem access via staticRead and staticExec;  | -1 |
 | other CTFE limitations | ? | no heap-allocated runtime type at compile-time. Heap allocated compile-time variables are turned into immutable static/const at runtime. | ? |
+| **OOP** |
+| design | C++ like | allows multi-method dynamic dispatch (defined outside, avoiding kitchen sink classes) | -1 |
 | **syntax** |
 | allows local imports | yes | | 1 |
 | mutually recursive imports | yes | no, compile-time error. you can use forward declaration and/or "mixin foosymbol" to tell the compiler that a symbol will be visible at one point. | 1 |
@@ -27,6 +29,7 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 | C++ | Calpypso (ldc fork) allows direct C++ integration |  | 1 |
 | C++ |  | C/C++ code generation giving us much better interop than what D offers. Case in point: Converting to cstring doesn't require an allocation and copy | -1 |
 | can compile to js | | yes | -1 |
+| direct use | no | Nim emits C code and you can break in with emit pragma; C code doesn't have to be written outside nim file | -1 |
 | **library** |
 | ranges | D ranges are faster than nim's iterators CHECKME |  | 1 |
 | - |  | nim's iterators are easier to write | -1 |
@@ -80,6 +83,10 @@ See also libraries.md
 | concatenation | ~ | & |
 | type name | T.stringof (builtin) | T.name (import typetraits) |
 | type of | typeof(expr) | expr.type |
+| class | class A : B | type A = ref object of B |
+| struct | struct A | type A = object |
+| empty statement | {} | discard |
+| conditional compilation | when defined(macosx) | version(OSX) |
 | compile time if | static if | when |
 | variable decl | auto a=foo | var a=foo |
 | immutable decl | immutable foo=bar; | let foo=bar; |
