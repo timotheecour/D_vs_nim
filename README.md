@@ -43,7 +43,7 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 | format code | `dfmt --inplace` | no | 1 |
 | REPL | https://github.com/dlang-community/drepl ; https://github.com/callumenator/dabble |  unofficially, you can use `nim secret` but it does not support a lot of things. The most promising is [nrpl](https://github.com/wheineman/nrpl) | ? |
 | **implementation** |
-| GC | single shared memory heap that is controlled by its GC, thread safe, fully conservative, stop-the-world | precise, thread-local heaps, a bit more deterministic and a lot faster, you can even timeframe it if you need consistent 60fps for example. Much better GC implementation for soft real-time applications because it can be paused or the max pause can be tuned. Default GC is not thread safe. GC implementation can be switched at compile-time between deferred reference counting with cycle detection (default), mark and sweep, boehm or no GC (memory regions). Untraced heap-allocated manually managed objects are available | -1 |
+| GC | single shared memory heap that is controlled by its GC, thread safe, fully conservative, stop-the-world | precise, thread-local heaps, a bit more deterministic and a lot faster, you can even timeframe it if you need consistent 60fps for example. Much better GC implementation for soft real-time applications because it can be paused or the max pause can be tuned. Default GC is not thread safe. GC implementation can be switched at compile-time between deferred reference counting with cycle detection (default), mark and sweep, boehm or no GC (memory regions). Untraced heap-allocated manually managed objects are available (nim distinguishes bw ref and ptr: traced references point to objects of a garbage collected heap, untraced references point to manually allocated objects or to objects somewhere else in memory) | -1 |
 | compile speed | faster (via dmd) CHECKME | | 1 |
 | runtime performance | ? | ? | 0 |
 | binary sizes produced |  | produces smaller binaries | -1 |
@@ -61,6 +61,7 @@ See also libraries.md
 | --- | --- | --- |
 | longest path | https://github.com/logicchains/LPATHBench/blob/master/d.d  | https://github.com/logicchains/LPATHBench/blob/master/nim.nim |
 | csv test | https://github.com/euantorano/faster-command-line-tools-in-nim/blob/master/D/csv_test.d | https://github.com/euantorano/faster-command-line-tools-in-nim/blob/master/Nim/csv_test.nim |
+| rosettacode examples | https://rosettacode.org/wiki/Category:D | https://rosettacode.org/wiki/Category:Nim |
 
 ## differences (not clear if pro or con)
 * nim has head immutability unlike D: http://nim-by-example.github.io/types/objects/
