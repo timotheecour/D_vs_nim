@@ -7,8 +7,9 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 | **UFCS** |
 | UFCS supported everywhere | not everywhere, eg: mixin(expr), typeof(expr) | yes | -1 |
 | **CTFE** |
+| engine | AST interpreter. every expression encountered will allocate one or more AST nodes. Within a tight loop, the interpreter can easily generate over 100_000_000 nodes and eat a few gigabytes of RAM. That can exhaust memory quite quickly. Future work: https://dlang.org/blog/2017/04/10/the-new-ctfe-engine/ | uses a register VM (also the basis of Nimscript); faster | -1 |
 | FFI during CTFE | no | no | 0 |
-| can print during CTFE | no | yes; allows filesystem access via staticRead and staticExec;  | -1 |
+| can read/write/exec during CTFE | read only (string import) | yes; allows filesystem access via staticRead and staticExec;  | -1 |
 | other CTFE limitations | ? | no heap-allocated runtime type at compile-time. Heap allocated compile-time variables are turned into immutable static/const at runtime. | ? |
 | **syntax** |
 | allows local imports | yes | | 1 |
@@ -42,7 +43,7 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 | format code | `dfmt --inplace` | no | 1 |
 | REPL | https://github.com/dlang-community/drepl ; https://github.com/callumenator/dabble |  unofficially, you can use `nim secret` but it does not support a lot of things. The most promising is [nrpl](https://github.com/wheineman/nrpl) | ? |
 | **implementation** |
-| GC | single shared memory heap that is controlled by its GC, thread safe | much better GC implementation for soft real-time applications because it can be paused or the max pause can be tuned; Thread local heaps. Default GC is not thread safe. GC implementation can be switched at compile-time between deferred reference counting with cycle detection (default), mark and sweep, boehm or no GC (memory regions). Untraced heap-allocated manually managed objects are available | -1 |
+| GC | single shared memory heap that is controlled by its GC, thread safe, fully conservative, stop-the-world | precise, thread-local heaps, a bit more deterministic and a lot faster, you can even timeframe it if you need consistent 60fps for example. Much better GC implementation for soft real-time applications because it can be paused or the max pause can be tuned. Default GC is not thread safe. GC implementation can be switched at compile-time between deferred reference counting with cycle detection (default), mark and sweep, boehm or no GC (memory regions). Untraced heap-allocated manually managed objects are available | -1 |
 | compile speed | faster (via dmd) CHECKME | | 1 |
 | runtime performance | ? | ? | 0 |
 | binary sizes produced |  | produces smaller binaries | -1 |
