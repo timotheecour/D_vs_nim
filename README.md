@@ -53,6 +53,8 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 | **metaprogramming** |
 | macro | no | hygienic macro system instead of string mixin; string mixin are available through `parseStmt`. The macros modify directly the abstract syntax tree given by the parser, before the compiler pass. It is possible to implement new DSLs or even a new language with a syntax different from Nim based on the macro system: example Smalltalk-like language (Spry)[http://sprylang.org/]| -1 |
 
+See also libraries.md
+
 ## similar code comparison
 
 | category | D | nim | 
@@ -87,6 +89,8 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 | **library** |
 | **tools** |
 | find declaration | dscanner --declaration | ? |
+
+See also libraries.md
 
 ## links
 * https://www.slant.co/versus/118/395/~d_vs_nim
