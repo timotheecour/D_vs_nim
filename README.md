@@ -89,6 +89,7 @@ See also libraries.md
 | **syntax** |
 | string mixin | `mixin("1+1")` | `stringMixinLikeInD("1+1")` with: `macro stringMixinLikeInD(s: static[string]): untyped = parseStmt(s)` source: https://forum.nim-lang.org/t/1779/2#19060 |
 | WISYWIG string | \`foo\nbar\` | """foo\nbar""" |
+| end of file (useful when debugging) | `__EOF__` | ? |
 | UFCS | foo(a, b), a.foo(b) | foo(a, b), a.foo(b), a.foo b, foo a b |
 | expr without parenthesis | `auto a=fun;` calls `fun` | `var a=fun` returns `fun` |
 | UFCS expr without parenthesis | `auto a=b.fun;` calls `fun` | `var a=b.fun` calls `fun` |
@@ -99,6 +100,7 @@ See also libraries.md
 | class | class A : B | type A = ref object of B |
 | struct | struct A | type A = object |
 | empty statement | {} | discard |
+| static if .. else if .. else| static if(foo1) bar1 else if(foo2) bar2 else bar3 | when foo1: bar1 elif foo2:bar2 else:bar3  |
 | conditional compilation | version(OSX) | when defined(macosx) |
 | compile time if | static if | when |
 | variable decl | auto a=foo | var a=foo |
