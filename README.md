@@ -28,6 +28,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`.
 | Distinction between traced and untraced pointers |  | yes | -1 |
 | forward declarations allowed? | yes | no; see https://github.com/nim-lang/Nim/issues/5287 | 1 |
 | User defined operators | partial: opCall opSlice, opAssign etc | yes | -1 |
+| User defined attributes | yes | ? | ? |
 | RAII | yes | no? see: [RAII](https://forum.nim-lang.org/t/362/1) | -1 |
 | delegates | yes | ? | ? |
 | **debugging** |
