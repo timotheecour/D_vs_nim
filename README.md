@@ -99,6 +99,9 @@ See also libraries.md
 | type of | typeof(expr) | expr.type |
 | class | class A : B | type A = ref object of B |
 | struct | struct A | type A = object |
+| double type | double | float64 |
+| int.sizeof | 4 | 8 |
+| float.init | NaN | 0 |
 | empty statement | {} | discard |
 | static if .. else if .. else| static if(foo1) bar1 else if(foo2) bar2 else bar3 | when foo1: bar1 elif foo2:bar2 else:bar3  |
 | conditional compilation | version(OSX) | when defined(macosx) |
