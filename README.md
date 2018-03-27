@@ -14,7 +14,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`.
 | can read/write/exec during CTFE | read only (string import) | yes; allows filesystem access via staticRead and staticExec;  | -1 |
 | other CTFE limitations | ? | no heap-allocated runtime type at compile-time. Heap allocated compile-time variables are turned into immutable static/const at runtime. | ? |
 | **OOP** |
-| design | C++ like | allows multi-method dynamic dispatch (defined outside, avoiding kitchen sink classes) | -1 |
+| design | Java like | allows multi-method dynamic dispatch (defined outside, avoiding kitchen sink classes) | -1 |
 | **syntax** |
 | allows local imports | yes | | 1 |
 | mutually recursive imports | yes | no, compile-time error. you can use forward declaration and/or "mixin foosymbol" to tell the compiler that a symbol will be visible at one point (CHECKME); see also: https://stackoverflow.com/questions/30235080/cannonical-way-to-do-circular-dependency-in-nim, https://github.com/nim-lang/Nim/issues/3961, https://forum.nim-lang.org/t/2114; workaround: The lack of cyclic dependencies in Nim is usually worked around by having a types module | 1 |
