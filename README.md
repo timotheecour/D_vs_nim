@@ -63,7 +63,7 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 | binary sizes produced |  | produces smaller binaries | -1 |
 | shared library support | linux:OK; OSX: ldc (not dmd); windows: not OK(CHECKME) ; | anything that can be linked from C | -1 |
 | **doc** |
-| builtin doc | ddoc (noisy and nonstandard) | markdown eg `  ## removes `n` from `L`. Efficiency: O(1).` (eg: https://nim-lang.org/docs/lists.html) | -1 |
+| builtin doc | ddoc (noisy and nonstandard) | reStructuredText eg `  ## removes `n` from `L`. Efficiency: O(1).` (eg: https://nim-lang.org/docs/lists.html) | -1 |
 | **metaprogramming** |
 | variadic templates | yes: void fun(T...)(T a) | no; [RFC: Variadic Generics](https://github.com/nim-lang/Nim/issues/1019) | 1 |
 | supported template parameters | type, alias, constant | ? | ? |
@@ -90,7 +90,7 @@ See also libraries.md
 | --- | --- | --- |
 | **syntax:lexical** |
 | nesting block comments | /++/ | #[ ]# |
-| WISYWIG string | \`foo\nbar\` | """foo\nbar""" |
+| WYSIWYG string | \`foo\nbar\`, r"foo\nbar", etc | """foo\nbar""", r"foo\nbar", etc(?) |
 | end of file (useful when debugging) | `__EOF__` | ? |
 | increment | i++ | i+=1 or inc(i) |
 | concatenation | ~ | & |
