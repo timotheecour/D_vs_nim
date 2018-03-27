@@ -22,7 +22,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`.
 | familiarity | C-like | C or Python-like | 0 |
 | interpolated strings | no | yes | -1 |
 | named parameter arguments | no | yes | -1 |
-| style | (subjective opinion) https://dlang.org/dstyle.html takes too much vertical whitespace (eg braces on their own line) | [Nim Enhancement Proposal #1](https://nim-lang.org/docs/nep1.html) | 0 |
+| style | (subjective opinion) https://dlang.org/dstyle.html ; style guide for phobos takes too much vertical whitespace (eg braces on their own line) | [Nim Enhancement Proposal #1](https://nim-lang.org/docs/nep1.html) | 0 |
 | **language** |
 | Distinction between traced and untraced pointers |  | yes | -1 |
 | forward declarations allowed? | yes | no; see https://github.com/nim-lang/Nim/issues/5287 | 1 |
@@ -46,7 +46,7 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 | repo split | dmd,druntime,phobos | single repo for compiler + stdlib making synchronization easier | -1 |
 | github history | highly intertwined (uses merges) | almost linear (guessing it rebases) | -1 |
 | issue tracker | bugzilla (issues.dlang.org) | github issues (https://github.com/nim-lang/Nim/issues) | -1 |
-| open bugs | 4563 (https://dlang.org/bugstats.html)  | 1230 https://github.com/nim-lang/Nim/issues | -1 |
+| opened/closed bugs | 4563/13906 (https://dlang.org/bugstats.html)  | 1230/3263 https://github.com/nim-lang/Nim/issues | ? |
 | **packages** |
 | packages | dub: https://code.dlang.org/ | nimble: https://nimble.directory/packages.xml and https://github.com/nim-lang/packages | 0 |
 | number of packages | 1247 | 639 | 1 |
