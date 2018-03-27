@@ -2,7 +2,7 @@
 ***PR's welcome!***
 Goal: up to date and objective comparison of features between D and nim, and 1:1 map of features to help D users learn nim and vice versa.
 
-Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`.
+Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correcting wrong entries, or adding more (see also other files eg libraries.md).
 
 | category | D | nim | 1 for D, -1 for nim |
 | --- | --- | --- | --- |
