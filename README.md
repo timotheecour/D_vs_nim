@@ -12,7 +12,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`.
 | engine | AST interpreter. every expression encountered will allocate one or more AST nodes. Within a tight loop, the interpreter can easily generate over 100_000_000 nodes and eat a few gigabytes of RAM. That can exhaust memory quite quickly. Future work: https://dlang.org/blog/2017/04/10/the-new-ctfe-engine/ | uses a register VM (also the basis of Nimscript); faster | -1 |
 | FFI during CTFE | no | no | 0 |
 | can read/write/exec during CTFE | read only (string import) | yes; allows filesystem access via staticRead and staticExec;  | -1 |
-| other CTFE limitations | ? | no heap-allocated runtime type at compile-time. Heap allocated compile-time variables are turned into immutable static/const at runtime. | ? |
+| other CTFE limitations | ? | Heap allocated compile-time variables are turned into immutable static/const at runtime. | ? |
 | **OOP** |
 | design | Java like | allows multi-method dynamic dispatch (defined outside, avoiding kitchen sink classes) | -1 |
 | **syntax** |
