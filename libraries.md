@@ -6,4 +6,5 @@ Goal: up to date and objective (as much as possible) comparison of third party l
 | --- | --- | --- | --- |
 | protobuf | https://github.com/msoucy/dproto | https://github.com/PMunch/protobuf-nim | 1 |
 | numerical | https://github.com/libmir/mir | https://github.com/mratsim/Arraymancer ; https://unicredit.github.io/neo/ | ? |
+| web server | https://github.com/vibe-d/vibe.d | https://github.com/2vg/mofuw | ? |
 

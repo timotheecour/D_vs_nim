@@ -4,7 +4,7 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 
 Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`.
 
-| category | D | nim | 1 for D, -1 for nim
+| category | D | nim | 1 for D, -1 for nim |
 | --- | --- | --- | --- |
 | **UFCS** |
 | UFCS supported everywhere | not everywhere, eg: mixin(expr), typeof(expr) | yes | -1 |
@@ -59,7 +59,6 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 | GC | single shared memory heap that is controlled by its GC, thread safe, fully conservative, stop-the-world | precise, thread-local heaps, a bit more deterministic and a lot faster, you can even timeframe it if you need consistent 60fps for example. Much better GC implementation for soft real-time applications because it can be paused or the max pause can be tuned. Default GC is not thread safe. GC implementation can be switched at compile-time between deferred reference counting with cycle detection (default), mark and sweep, boehm or no GC (memory regions). Untraced heap-allocated manually managed objects are available (nim distinguishes bw ref and ptr: traced references point to objects of a garbage collected heap, untraced references point to manually allocated objects or to objects somewhere else in memory) | -1 |
 | compile speed | faster (via dmd) CHECKME | | 1 |
 | is compiler bootstrapped? | frontend, not yet backend | yes | -1 |
-| runtime performance | ? | ? | 0 |
 | binary sizes produced |  | produces smaller binaries | -1 |
 | shared library support | linux:OK; OSX: ldc (not dmd); windows: not OK(CHECKME) ; | anything that can be linked from C | -1 |
 | **doc** |
@@ -72,6 +71,14 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 | available backends | custom (dmd), gcc (gdc), llvm (ldc) | C, C++, js; WIP llvm (https://github.com/arnetheduck/nlvm) | ? |
 
 See also libraries.md
+
+## runtime performance
+
+| category/benchmark | D | nim | 1 for D, -1 for nim |
+| --- | --- | --- | --- |
+| functional: [Zero_functional](https://github.com/alehander42/zero-functional); Zero_functional fuses loop at compile-time when chaining zip.map.filter.reduce functional constructs | ? (missing D entry) | nim is currently number 1 or 2 against 9 other langs. The other number 2 or 1 lang being Rust. | ? |
+| webserver | ? | [Mofuw](https://github.com/2vg/mofuw) by @2vg is faster than tokio-minihttp, the current \#1 on TechEmpower benchmark | ? |
+| parsing csv files | [csv-blog-d](https://dlang.org/blog/2017/05/24/faster-command-line-tools-in-d/) | [csv-blog-nim](https://nim-lang.org/blog/2017/05/25/faster-command-line-tools-in-nim.html); D and Nim had the same speed and same compilation time. fastest CSV parser (to parse GBs of machine learning datasets) is [XSV](https://github.com/BurntSushi/xsv) in Rust | 0 |
 
 ## similar code comparison
 
@@ -103,7 +110,7 @@ See also libraries.md
 | static if .. else if .. else| static if(foo1) bar1 else if(foo2) bar2 else bar3 | when foo1: bar1 elif foo2:bar2 else:bar3  |
 | conditional compilation | version(OSX) | when defined(macosx) |
 | compile time if | static if | when |
-| sring import | import("foo"); requires `-J` for security | staticRead("foo") |
+| string import | import("foo"); requires `-J` for security | staticRead("foo") |
 | scope guards | `scope(exit) foo` etc | `finally: foo` (https://forum.nim-lang.org/t/141) |
 | **types** |
 | type of | typeof(expr) | expr.type |
