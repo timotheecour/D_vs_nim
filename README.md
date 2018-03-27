@@ -42,7 +42,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`.
 | ranges | D ranges (implements empty, front, popFront) | yield-based iterators ; maybe simpler to write
 but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectional ranges) | ? |
 | **ecosystem** |
-| contributing | PR's languish forever | PR's get merged way faster in nim (see https://github.com/nim-lang/Nim/pulls vs https://github.com/dlang/dmd/pulls or phobos etc); QUOTE: Nim is magnitudes of orders easier to contribute to. Not only the compiler code is easier to reason about (at least for me), but PRs are accepted a lot more willingly. I bet such openness of the core devs makes Nim evolution faster and I hope it's gonna stay that way no matter 1.0. | -1 |
+| contributing | PR's languish forever | PR's get merged way faster in nim (see https://github.com/nim-lang/Nim/pulls vs https://github.com/dlang/dmd/pulls or phobos etc but not sure how to quantify objectively; see also https://github.com/nim-lang/Nim/pulse vs https://github.com/dlang/dmd/pulse). QUOTE: Nim is magnitudes of orders easier to contribute to. Not only the compiler code is easier to reason about (at least for me), but PRs are accepted a lot more willingly. I bet such openness of the core devs makes Nim evolution faster and I hope it's gonna stay that way no matter 1.0. | -1 |
 | repo split | dmd,druntime,phobos | single repo for compiler + stdlib making synchronization easier | -1 |
 | github history | highly intertwined (uses merges) | almost linear (guessing it rebases) | -1 |
 | issue tracker | bugzilla (issues.dlang.org) | github issues (https://github.com/nim-lang/Nim/issues) | -1 |
