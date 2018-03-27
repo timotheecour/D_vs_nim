@@ -24,6 +24,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`.
 | named parameter arguments | no | yes | -1 |
 | style | (subjective opinion) https://dlang.org/dstyle.html ; style guide for phobos takes too much vertical whitespace (eg braces on their own line) | [Nim Enhancement Proposal #1](https://nim-lang.org/docs/nep1.html) | 0 |
 | **language** |
+| attribute inference | for template functions | ? | ? |
 | Distinction between traced and untraced pointers |  | yes | -1 |
 | forward declarations allowed? | yes | no; see https://github.com/nim-lang/Nim/issues/5287 | 1 |
 | User defined operators | no | yes | -1 |
@@ -86,35 +87,46 @@ See also libraries.md
 ## map of corresponding features
 | category | D | nim | 
 | --- | --- | --- |
-| **syntax** |
-| string mixin | `mixin("1+1")` | `stringMixinLikeInD("1+1")` with: `macro stringMixinLikeInD(s: static[string]): untyped = parseStmt(s)` source: https://forum.nim-lang.org/t/1779/2#19060 |
+| **syntax:lexical** |
+| nesting block comments | /++/ | #[ ]# |
 | WISYWIG string | \`foo\nbar\` | """foo\nbar""" |
 | end of file (useful when debugging) | `__EOF__` | ? |
+| increment | i++ | i+=1 or inc(i) |
+| concatenation | ~ | & |
+| empty statement | {} | discard |
+| **syntax:parsing** |
+| string mixin | `mixin("1+1")` | `stringMixinLikeInD("1+1")` with: `macro stringMixinLikeInD(s: static[string]): untyped = parseStmt(s)` source: https://forum.nim-lang.org/t/1779/2#19060 |
 | UFCS | foo(a, b), a.foo(b) | foo(a, b), a.foo(b), a.foo b, foo a b |
 | expr without parenthesis | `auto a=fun;` calls `fun` | `var a=fun` returns `fun` |
 | UFCS expr without parenthesis | `auto a=b.fun;` calls `fun` | `var a=b.fun` calls `fun` |
-| increment | i++ | i+=1 or inc(i) |
-| concatenation | ~ | & |
-| type name | T.stringof (builtin) | T.name (import typetraits) |
-| type of | typeof(expr) | expr.type |
-| class | class A : B | type A = ref object of B |
-| struct | struct A | type A = object |
-| double type | double | float |
-| int.sizeof | 4 | architecture-dependent (4 on 32bit, 8 on 64bit) |
-| float.init | NaN | 0 |
-| empty statement | {} | discard |
 | static if .. else if .. else| static if(foo1) bar1 else if(foo2) bar2 else bar3 | when foo1: bar1 elif foo2:bar2 else:bar3  |
 | conditional compilation | version(OSX) | when defined(macosx) |
 | compile time if | static if | when |
+| sring import | import("foo"); requires `-J` for security | staticRead("foo") |
+| scope guards | `scope(exit) foo` etc | `finally: foo` (https://forum.nim-lang.org/t/141) |
+| **types** |
+| type of | typeof(expr) | expr.type |
+| type name | T.stringof (builtin) | T.name (import typetraits) |
+| class | class A : B | type A = ref object of B |
+| struct | struct A | type A = object |
+| float: 32, 64 bit | float, double | float32, float(float64) |
+| pointer sized int, uint | ptrdiff_t, size_t | int, uint |
+| sized ints | byte, short, int, long | int8, int16, int32, int64 |
+| **decl** |
 | variable decl | auto a=foo | var a=foo |
 | immutable decl | immutable foo=bar; | let foo=bar |
 | compile time decl | enum foo=bar | const foo=bar |
-| nesting block comments | /++/ | #[ ]# |
-| sring import | import("foo"); requires `-J` for security | staticRead("foo") |
-| scope guards | `scope(exit) foo` etc | `finally: foo` (https://forum.nim-lang.org/t/141) |
-| file | `__FILE__` | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
+| **attributes** |
+| purity | `pure` | `.noSideEffect` |
+| nothrow | `nothrow` | ? |
+| safe | `@safe` | ? |
+| GC free | `@nogc` | ? |
+| lockfree | ? | locks:0 |
 | **language** |
 | unit tests | `unittest{stmt}` | https://nim-lang.org/docs/unittest.html |
+| **semantics** |
+| float.init | NaN | 0 |
+| file | `__FILE__` | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
 | **library** |
 | universal type conversion | a.to!T | ? |
 | **cmd line** |
