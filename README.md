@@ -17,7 +17,8 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`.
 | design | C++ like | allows multi-method dynamic dispatch (defined outside, avoiding kitchen sink classes) | -1 |
 | **syntax** |
 | allows local imports | yes | | 1 |
-| mutually recursive imports | yes | no, compile-time error. you can use forward declaration and/or "mixin foosymbol" to tell the compiler that a symbol will be visible at one point. | 1 |
+| mutually recursive imports | yes | no, compile-time error. you can use forward declaration and/or "mixin foosymbol" to tell the compiler that a symbol will be visible at one point (CHECKME); see also: https://stackoverflow.com/questions/30235080/cannonical-way-to-do-circular-dependency-in-nim, https://github.com/nim-lang/Nim/issues/3961, https://forum.nim-lang.org/t/2114; workaround: The lack of cyclic dependencies in Nim is usually worked around by having a types module | 1 |
+| mutually recursive types | yes | these types can only be declared within a single type section (else would require arbitrary symbol lookahead which slows down compilation.) | 1 |
 | familiarity | C-like | C or Python-like | 0 |
 | interpolated strings | no | yes | -1 |
 | named parameter arguments | no | yes | -1 |
@@ -27,6 +28,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`.
 | forward declarations allowed? | yes | no; see https://github.com/nim-lang/Nim/issues/5287 | 1 |
 | operator overloading | no | yes | -1 |
 | RAII | yes | no? see: [RAII](https://forum.nim-lang.org/t/362/1) | -1 |
+| delegates | yes | ? | ? |
 | **debugging** |
 | **maturity** |
 | stability | few breaking changes in each release | pre 1.0, new releases often make lots of break changes | 1 |
@@ -38,7 +40,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`.
 | direct use | no | Nim emits C code and you can break in with emit pragma; C code doesn't have to be written outside nim file | -1 |
 | **library** |
 | ranges | D ranges (implements empty, front, popFront) | yield-based iterators ; maybe simpler to write
-but less efficient? | ? |
+but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectional ranges) | ? |
 | **ecosystem** |
 | contributing | PR's languish forever | PR's get merged way faster in nim (see https://github.com/nim-lang/Nim/pulls vs https://github.com/dlang/dmd/pulls or phobos etc); QUOTE: Nim is magnitudes of orders easier to contribute to. Not only the compiler code is easier to reason about (at least for me), but PRs are accepted a lot more willingly. I bet such openness of the core devs makes Nim evolution faster and I hope it's gonna stay that way no matter 1.0. | -1 |
 | repo split | dmd,druntime,phobos | single repo for compiler + stdlib making synchronization easier | -1 |
@@ -61,6 +63,8 @@ but less efficient? | ? |
 | **doc** |
 | builtin doc | ddoc (noisy and nonstandard) | markdown eg `  ## removes `n` from `L`. Efficiency: O(1).` (eg: https://nim-lang.org/docs/lists.html) | -1 |
 | **metaprogramming** |
+| variadic templates | yes: void fun(T...)(T a) | no; [RFC: Variadic Generics](https://github.com/nim-lang/Nim/issues/1019) | 1 |
+| supported template parameters | type, alias, constant | ? | ? |
 | macro | no | hygienic macro system instead of string mixin; string mixin are available through `parseStmt`. The macros modify directly the abstract syntax tree given by the parser, before the compiler pass. It is possible to implement new DSLs or even a new language with a syntax different from Nim based on the macro system: example Smalltalk-like language (Spry)[http://sprylang.org/]| -1 |
 | **backend** |
 | available backends | custom (dmd), gcc (gdc), llvm (ldc) | C, C++, js; WIP llvm (https://github.com/arnetheduck/nlvm) | ? |
@@ -105,7 +109,9 @@ See also libraries.md
 | scope guards | `scope(exit) foo` etc | `finally: foo` (https://forum.nim-lang.org/t/141) |
 | file | `__FILE__` | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
 | **language** |
+| unit tests | `unittest{stmt}` | ? |
 | **library** |
+| universal type conversion | a.to!T | ? |
 | **resources** |
 | tutorials | https://tour.dlang.org/ | https://nim-lang.org/docs/tut1.html |
 | **tools** |
