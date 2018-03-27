@@ -99,22 +99,22 @@ See also libraries.md
 | type of | typeof(expr) | expr.type |
 | class | class A : B | type A = ref object of B |
 | struct | struct A | type A = object |
-| double type | double | float64 |
-| int.sizeof | 4 | 8 |
+| double type | double | float |
+| int.sizeof | 4 | architecture-dependent (4 on 32bit, 8 on 64bit) |
 | float.init | NaN | 0 |
 | empty statement | {} | discard |
 | static if .. else if .. else| static if(foo1) bar1 else if(foo2) bar2 else bar3 | when foo1: bar1 elif foo2:bar2 else:bar3  |
 | conditional compilation | version(OSX) | when defined(macosx) |
 | compile time if | static if | when |
 | variable decl | auto a=foo | var a=foo |
-| immutable decl | immutable foo=bar; | let foo=bar; |
+| immutable decl | immutable foo=bar; | let foo=bar |
 | compile time decl | enum foo=bar | const foo=bar |
 | nesting block comments | /++/ | #[ ]# |
 | sring import | import("foo"); requires `-J` for security | staticRead("foo") |
 | scope guards | `scope(exit) foo` etc | `finally: foo` (https://forum.nim-lang.org/t/141) |
 | file | `__FILE__` | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
 | **language** |
-| unit tests | `unittest{stmt}` | ? |
+| unit tests | `unittest{stmt}` | https://nim-lang.org/docs/unittest.html |
 | **library** |
 | universal type conversion | a.to!T | ? |
 | **cmd line** |
