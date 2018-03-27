@@ -2,6 +2,8 @@
 ***PR's welcome!***
 Goal: up to date and objective comparison of features between D and nim, and 1:1 map of features to help D users learn nim and vice versa.
 
+Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`.
+
 | category | D | nim | 1 for D, -1 for nim
 | --- | --- | --- | --- |
 | **UFCS** |
@@ -17,10 +19,14 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 | allows local imports | yes | | 1 |
 | mutually recursive imports | yes | no, compile-time error. you can use forward declaration and/or "mixin foosymbol" to tell the compiler that a symbol will be visible at one point. | 1 |
 | familiarity | C-like | C or Python-like | 0 |
-| interpolated strings |  | yes | -1 |
+| interpolated strings | no | yes | -1 |
+| named parameter arguments | no | yes | -1 |
 | style | (subjective opinion) official D style guide is controversial, not standard, takes too much vertical whitespace (eg braces on their own line) | [Nim Enhancement Proposal #1](https://nim-lang.org/docs/nep1.html) | 0 |
 | **language** |
 | Distinction between traced and untraced pointers |  | yes | -1 |
+| forward declarations allowed? | yes | no; see https://github.com/nim-lang/Nim/issues/5287 | 1 |
+| operator overloading | no | yes | -1 |
+| RAII | yes | no? see: [RAII](https://forum.nim-lang.org/t/362/1) | -1 |
 | **debugging** |
 | **maturity** |
 | stability | few breaking changes in each release | pre 1.0, new releases often make lots of break changes | 1 |
@@ -31,8 +37,8 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 | can compile to js | | yes | -1 |
 | direct use | no | Nim emits C code and you can break in with emit pragma; C code doesn't have to be written outside nim file | -1 |
 | **library** |
-| ranges | D ranges are faster than nim's iterators CHECKME |  | 1 |
-| - |  | nim's iterators are easier to write | -1 |
+| ranges | D ranges (implements empty, front, popFront) | yield-based iterators ; maybe simpler to write
+but less efficient? | ? |
 | **ecosystem** |
 | contributing | PR's languish forever | PR's get merged way faster in nim (see https://github.com/nim-lang/Nim/pulls vs https://github.com/dlang/dmd/pulls or phobos etc); QUOTE: Nim is magnitudes of orders easier to contribute to. Not only the compiler code is easier to reason about (at least for me), but PRs are accepted a lot more willingly. I bet such openness of the core devs makes Nim evolution faster and I hope it's gonna stay that way no matter 1.0. | -1 |
 | repo split | dmd,druntime,phobos | single repo for compiler + stdlib making synchronization easier | -1 |
@@ -48,6 +54,7 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 | **implementation** |
 | GC | single shared memory heap that is controlled by its GC, thread safe, fully conservative, stop-the-world | precise, thread-local heaps, a bit more deterministic and a lot faster, you can even timeframe it if you need consistent 60fps for example. Much better GC implementation for soft real-time applications because it can be paused or the max pause can be tuned. Default GC is not thread safe. GC implementation can be switched at compile-time between deferred reference counting with cycle detection (default), mark and sweep, boehm or no GC (memory regions). Untraced heap-allocated manually managed objects are available (nim distinguishes bw ref and ptr: traced references point to objects of a garbage collected heap, untraced references point to manually allocated objects or to objects somewhere else in memory) | -1 |
 | compile speed | faster (via dmd) CHECKME | | 1 |
+| is compiler bootstrapped? | frontend, not yet backend | yes | -1 |
 | runtime performance | ? | ? | 0 |
 | binary sizes produced |  | produces smaller binaries | -1 |
 | shared library support | linux:OK; OSX: ldc (not dmd); windows: not OK(CHECKME) ; | anything that can be linked from C | -1 |
@@ -55,6 +62,8 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 | builtin doc | ddoc (noisy and nonstandard) | markdown eg `  ## removes `n` from `L`. Efficiency: O(1).` (eg: https://nim-lang.org/docs/lists.html) | -1 |
 | **metaprogramming** |
 | macro | no | hygienic macro system instead of string mixin; string mixin are available through `parseStmt`. The macros modify directly the abstract syntax tree given by the parser, before the compiler pass. It is possible to implement new DSLs or even a new language with a syntax different from Nim based on the macro system: example Smalltalk-like language (Spry)[http://sprylang.org/]| -1 |
+| **backend** |
+| available backends | custom (dmd), gcc (gdc), llvm (ldc) | C, C++, js; WIP llvm (https://github.com/arnetheduck/nlvm) | ? |
 
 See also libraries.md
 
@@ -93,23 +102,27 @@ See also libraries.md
 | compile time decl | enum foo=bar | const foo=bar |
 | nesting block comments | /++/ | #[ ]# |
 | sring import | import("foo"); requires `-J` for security | staticRead("foo") |
+| scope guards | `scope(exit) foo` etc | `finally: foo` (https://forum.nim-lang.org/t/141) |
 | file | `__FILE__` | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
+| **language** |
 | **library** |
+| **resources** |
+| tutorials | https://tour.dlang.org/ | https://nim-lang.org/docs/tut1.html |
 | **tools** |
-| find declaration | dscanner --declaration | ? |
+| find declaration | dscanner --declaration | nimgrep (but no declaration search, cf https://github.com/nim-lang/Nim/issues/7419) |
+| fix code | dfix | nimfix |
+| package manager | dub | nimble |
 
 See also libraries.md
 
 ## links
 * https://www.slant.co/versus/118/395/~d_vs_nim
 * https://forum.nim-lang.org/t/1779 Nim vs D
+* https://forum.dlang.org/post/mailman.1536.1428946094.3111.digitalmars-d@puremagic.com D vs nim
 * http://gradha.github.io/articles/2015/02/goodbye-nim-and-good-luck.html
 * https://www.quora.com/Of-the-emerging-systems-languages-Rust-D-Go-and-Nim-which-is-the-strongest-language-and-why
 * https://github.com/kostya/benchmarks
 * https://digitalmars.com/d/archives/digitalmars/D/D_and_Nim_251571.html
-
-## scratch
-* makes some common idioms in D first-class citizens.   For example, imperative type declarations are first-class citizens so all the boiler plate around "if (isInputRange!(R))" type stuff goes away in Nim
 
 ## nim questions
 * how to specify immutable inside `for(foo in bar)` ?
