@@ -22,11 +22,11 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`.
 | familiarity | C-like | C or Python-like | 0 |
 | interpolated strings | no | yes | -1 |
 | named parameter arguments | no | yes | -1 |
-| style | (subjective opinion) official D style guide is controversial, not standard, takes too much vertical whitespace (eg braces on their own line) | [Nim Enhancement Proposal #1](https://nim-lang.org/docs/nep1.html) | 0 |
+| style | (subjective opinion) https://dlang.org/dstyle.html takes too much vertical whitespace (eg braces on their own line) | [Nim Enhancement Proposal #1](https://nim-lang.org/docs/nep1.html) | 0 |
 | **language** |
 | Distinction between traced and untraced pointers |  | yes | -1 |
 | forward declarations allowed? | yes | no; see https://github.com/nim-lang/Nim/issues/5287 | 1 |
-| operator overloading | no | yes | -1 |
+| User defined operators | no | yes | -1 |
 | RAII | yes | no? see: [RAII](https://forum.nim-lang.org/t/362/1) | -1 |
 | delegates | yes | ? | ? |
 | **debugging** |
@@ -51,7 +51,7 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 | packages | dub: https://code.dlang.org/ | nimble: https://nimble.directory/packages.xml and https://github.com/nim-lang/packages | 0 |
 | number of packages | 1247 | 639 | 1 |
 | **tooling** |
-| format code | `dfmt --inplace` | no | 1 |
+| format code | `dfmt --inplace` | no; nimpretty? | 1 |
 | REPL | https://github.com/dlang-community/drepl ; https://github.com/callumenator/dabble |  unofficially, you can use `nim secret` but it does not support a lot of things. The most promising is [nrpl](https://github.com/wheineman/nrpl) | ? |
 | **implementation** |
 | GC | single shared memory heap that is controlled by its GC, thread safe, fully conservative, stop-the-world | precise, thread-local heaps, a bit more deterministic and a lot faster, you can even timeframe it if you need consistent 60fps for example. Much better GC implementation for soft real-time applications because it can be paused or the max pause can be tuned. Default GC is not thread safe. GC implementation can be switched at compile-time between deferred reference counting with cycle detection (default), mark and sweep, boehm or no GC (memory regions). Untraced heap-allocated manually managed objects are available (nim distinguishes bw ref and ptr: traced references point to objects of a garbage collected heap, untraced references point to manually allocated objects or to objects somewhere else in memory) | -1 |
@@ -99,7 +99,7 @@ See also libraries.md
 | class | class A : B | type A = ref object of B |
 | struct | struct A | type A = object |
 | empty statement | {} | discard |
-| conditional compilation | when defined(macosx) | version(OSX) |
+| conditional compilation | version(OSX) | when defined(macosx) |
 | compile time if | static if | when |
 | variable decl | auto a=foo | var a=foo |
 | immutable decl | immutable foo=bar; | let foo=bar; |
@@ -112,6 +112,8 @@ See also libraries.md
 | unit tests | `unittest{stmt}` | ? |
 | **library** |
 | universal type conversion | a.to!T | ? |
+| **cmd line** |
+| custom define | -version=foo | --define:foo or --define:foo=bar |
 | **resources** |
 | tutorials | https://tour.dlang.org/ | https://nim-lang.org/docs/tut1.html |
 | **tools** |
