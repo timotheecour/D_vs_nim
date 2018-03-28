@@ -53,7 +53,8 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 | packages | dub: https://code.dlang.org/ | nimble: https://nimble.directory/packages.xml and https://github.com/nim-lang/packages | 0 |
 | number of packages | 1247 | 639 | 1 |
 | **tooling** |
-| format code | `dfmt --inplace` | no; nimpretty? | 1 |
+| format code | `dfmt --inplace` | nimpretty, not yet ready: https://github.com/nim-lang/Nim/issues/7420 | 1 |
+| code reduction for bugs | dustmite | ? | 1 |
 | REPL | https://github.com/dlang-community/drepl ; https://github.com/callumenator/dabble |  unofficially, you can use `nim secret` but it does not support a lot of things. The most promising is [nrpl](https://github.com/wheineman/nrpl) | ? |
 | **implementation** |
 | GC | single shared memory heap that is controlled by its GC, thread safe, fully conservative, stop-the-world | precise, thread-local heaps, a bit more deterministic and a lot faster, you can even timeframe it if you need consistent 60fps for example. Much better GC implementation for soft real-time applications because it can be paused or the max pause can be tuned. Default GC is not thread safe. GC implementation can be switched at compile-time between deferred reference counting with cycle detection (default), mark and sweep, boehm or no GC (memory regions). Untraced heap-allocated manually managed objects are available (nim distinguishes bw ref and ptr: traced references point to objects of a garbage collected heap, untraced references point to manually allocated objects or to objects somewhere else in memory) | -1 |
@@ -111,7 +112,15 @@ See also libraries.md
 | conditional compilation | version(OSX) | when defined(macosx) |
 | compile time if | static if | when |
 | string import | import("foo"); requires `-J` for security | staticRead("foo") |
+| public import | public import foo; | ? |
 | scope guards | `scope(exit) foo` etc | `finally: foo` (https://forum.nim-lang.org/t/141) |
+| **syntax:array** |
+| static array litteral | int[2] a = [1,2]; | var a = [1,2] |
+| dynamic array litteral | auto a = @[1,2]; | var a = @[1,2] |
+| dynamic array create | auto a = new int[2]; | var a = newSeq[int](2) |
+| empty dynamic array | auto a = []; | var a:seq[int] = @[] |
+| indexing slice of a | a[1..$-2]; | a[1..^2] |
+| length | a.length; | a.len |
 | **types** |
 | type of | typeof(expr) | expr.type |
 | type name | T.stringof (builtin) | T.name (import typetraits) |
@@ -136,7 +145,7 @@ See also libraries.md
 | float.init | NaN | 0 |
 | file | `__FILE__` | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
 | **library** |
-| universal type conversion | a.to!T | ? |
+| universal type conversion | a.to!T | no: https://github.com/nim-lang/Nim/issues/7430 |
 | **cmd line** |
 | custom define | -version=foo | --define:foo or --define:foo=bar |
 | **resources** |
