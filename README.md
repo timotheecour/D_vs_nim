@@ -65,7 +65,7 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 | **doc** |
 | builtin doc | ddoc (noisy and nonstandard) | reStructuredText eg `  ## removes `n` from `L`. Efficiency: O(1).` (eg: https://nim-lang.org/docs/lists.html) | -1 |
 | **metaprogramming** |
-| variadic templates | yes: void fun(T...)(T a) | no; [RFC: Variadic Generics](https://github.com/nim-lang/Nim/issues/1019); but `varargs[untyped]` allowed in macros; not same though, eg can't be used in template functions, can't be empty | 1 |
+| variadic templates | yes: void fun(T...)(T a) | no; [RFC: Variadic Generics](https://github.com/nim-lang/Nim/issues/1019); but `varargs[untyped]` allowed in macros; not same though, eg can't be used in template functions | 1 |
 | supported template parameters | type, alias, constant | ? | ? |
 | macro | no | hygienic macro system instead of string mixin; string mixin are available through `parseStmt`. The macros modify directly the abstract syntax tree given by the parser, before the compiler pass. It is possible to implement new DSLs or even a new language with a syntax different from Nim based on the macro system: example Smalltalk-like language (Spry)[http://sprylang.org/]| -1 |
 | **backend** |
@@ -119,7 +119,7 @@ See also libraries.md
 | dynamic array litteral | auto a = @[1,2]; | var a = @[1,2] |
 | dynamic array create | auto a = new int[2]; | var a = newSeq[int](2) |
 | empty dynamic array | auto a = []; | var a:seq[int] = @[] |
-| indexing slice of a | a[1..$-1]; | a[1..^2] |
+| indexing slice of a | a[1..$-1], a[1..3] | a[1..^2], a[1..<3] |
 | length | a.length; | a.len |
 | **types** |
 | type of | typeof(expr) | expr.type |
@@ -167,6 +167,7 @@ See also libraries.md
 * https://www.quora.com/Of-the-emerging-systems-languages-Rust-D-Go-and-Nim-which-is-the-strongest-language-and-why
 * https://github.com/kostya/benchmarks
 * https://digitalmars.com/d/archives/digitalmars/D/D_and_Nim_251571.html
+* https://forum.nim-lang.org/t/1983#12391 A few questions about Nim
 
 ## nim questions
 * how to specify immutable inside `for(foo in bar)` ?
