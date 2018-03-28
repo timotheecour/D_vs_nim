@@ -23,14 +23,14 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | interpolated strings | no | yes | -1 |
 | named parameter arguments | no | yes | -1 |
 | style | (subjective opinion) https://dlang.org/dstyle.html ; style guide for phobos takes too much vertical whitespace (eg braces on their own line) | [Nim Enhancement Proposal #1](https://nim-lang.org/docs/nep1.html) | 0 |
-| **language** |
+| **semantics** |
+| rvalue references | no | ? | ? |
 | attribute inference | for template functions | ? | ? |
 | Distinction between traced and untraced pointers |  | yes | -1 |
 | forward declarations allowed? | yes | no; see https://github.com/nim-lang/Nim/issues/5287 | 1 |
 | User defined operators | partial: opCall opSlice, opAssign etc | yes | -1 |
 | User defined attributes | yes | ? | ? |
 | RAII | yes | no? see: [RAII](https://forum.nim-lang.org/t/362/1) | -1 |
-| delegates | yes | ? | ? |
 | **debugging** |
 | **maturity** |
 | stability | few breaking changes in each release | pre 1.0, new releases often make lots of break changes | 1 |
@@ -119,7 +119,7 @@ See also libraries.md
 | dynamic array litteral | auto a = @[1,2]; | var a = @[1,2] |
 | dynamic array create | auto a = new int[2]; | var a = newSeq[int](2) |
 | empty dynamic array | auto a = []; | var a:seq[int] = @[] |
-| indexing slice of a | a[1..$-2]; | a[1..^2] |
+| indexing slice of a | a[1..$-1]; | a[1..^2] |
 | length | a.length; | a.len |
 | **types** |
 | type of | typeof(expr) | expr.type |
@@ -129,6 +129,8 @@ See also libraries.md
 | float: 32, 64 bit | float, double | float32, float(float64) |
 | pointer sized int, uint | ptrdiff_t, size_t | int, uint |
 | sized ints | byte, short, int, long | int8, int16, int32, int64 |
+| **functions** |
+| delegates | yes | yes |
 | **decl** |
 | variable decl | auto a=foo | var a=foo |
 | immutable decl | immutable foo=bar; | let foo=bar |
