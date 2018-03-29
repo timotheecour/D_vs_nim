@@ -8,6 +8,8 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | --- | --- | --- | --- |
 | **UFCS** |
 | UFCS supported everywhere | not everywhere, eg: mixin(expr), typeof(expr) | yes | -1 |
+| **tuple** |
+| tuple unpacking | no | yes:`proc getTup(): auto = (4, "foo"); let (_, a) = getTup()` | -1 |
 | **CTFE** |
 | engine | AST interpreter. every expression encountered will allocate one or more AST nodes. Within a tight loop, the interpreter can easily generate over 100_000_000 nodes and eat a few gigabytes of RAM. That can exhaust memory quite quickly. Future work: https://dlang.org/blog/2017/04/10/the-new-ctfe-engine/ | uses a register VM (also the basis of Nimscript); faster | -1 |
 | FFI during CTFE | no | no | 0 |
