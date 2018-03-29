@@ -148,7 +148,7 @@ See also libraries.md
 | float.init | NaN | 0 |
 | file | `__FILE__` | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
 | **traits** |
-| expr compiles? | __traits(compiles, expr) | ? |
+| expr compiles? | __traits(compiles, expr) | compiles(expr) |
 | **library** |
 | universal type conversion | a.to!T | no: https://github.com/nim-lang/Nim/issues/7430 |
 | **cmd line** |
