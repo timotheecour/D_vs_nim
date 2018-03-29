@@ -108,36 +108,36 @@ See also libraries.md
 | UFCS | foo(a, b), a.foo(b) | foo(a, b), a.foo(b), a.foo b, foo a, b |
 | expr without parenthesis | `auto a=fun;` calls `fun` | `var a=fun` returns `fun` |
 | UFCS expr without parenthesis | `auto a=b.fun;` calls `fun` | `var a=b.fun` calls `fun` |
-| static if .. else if .. else| static if(foo1) bar1 else if(foo2) bar2 else bar3 | when foo1: bar1 elif foo2:bar2 else:bar3  |
-| conditional compilation | version(OSX) | when defined(macosx) |
-| compile time if | static if | when |
-| string import | import("foo"); requires `-J` for security | staticRead("foo") |
-| public import | public import foo; | import foo; export foo; |
-| static import | static import foo; | from foo import nil |
+| static if .. else if .. else| `static if(foo1) bar1 else if(foo2) bar2 else bar3` | `when foo1: bar1 elif foo2:bar2 else:bar3`  |
+| conditional compilation | `version(OSX)` | `when defined(macosx)` |
+| compile time if | `static if` | `when` |
+| string import | `import("foo");` requires `-J` for security | `staticRead("foo")` |
+| public import | `public import foo;` | `import foo; export foo;` |
+| static import | `static import foo;` | `from foo import nil` |
 | **syntax:exceptions** |
 | scope guards | `scope(exit) foo`, `scope(success) foo`, `scope(failure) foo`,  | `defer: foo`, ? , ? |
 | try throw catch finally | <code>try{throw new Exception("bar");}<br>catch(Exception e) {writeln(e);}<br>finally {}<code>  | <code>try: raise newException(IOError, "test exception")<br>except IOError: (let e = (ref IOError)(getCurrentException()); echo e[])<br>finally: discard<code> |
 | **syntax:array** |
-| static array literal | int[2] a = [1,2]; | var a = [1,2] |
-| dynamic array literal | auto a = [1,2]; | var a = @[1,2] |
-| dynamic array create | auto a = new int[2]; | var a = newSeq[int](2) |
-| empty dynamic array | auto a = []; | var a:seq[int] = @[] |
-| indexing slice of a | a[1..$-1], a[1..3] | a[1..^2], a[1..<3] |
-| length | a.length; | a.len |
+| static array literal | `int[2] a = [1,2];` | `var a = [1,2]` |
+| dynamic array literal | `auto a = [1,2];` | `var a = @[1,2]` |
+| dynamic array create | `auto a = new int[2];` | `var a = newSeq[int](2)` |
+| empty dynamic array | `auto a = [];` | `var a:seq[int] = @[]` |
+| indexing slice of a | `a[1..$-1], a[1..3]` | `a[1..^2], a[1..<3]` |
+| length | `a.length;` | `a.len` |
 | **types** |
-| type of | typeof(expr) | expr.type |
-| type name | T.stringof (builtin) | T.name (import typetraits) |
-| class | class A : B | type A = ref object of B |
-| struct | struct A | type A = object |
+| type of | `typeof(expr)` | `expr.type` |
+| type name | `T.stringof` (builtin) | `T.name` (import typetraits) |
+| class | `class A : B` | `type A = ref object of B` |
+| struct | `struct A` | `type A = object` |
 | float: 32, 64 bit | float, double | float32, float(float64) |
 | pointer sized int, uint | ptrdiff_t, size_t | int, uint |
 | sized ints | byte, short, int, long | int8, int16, int32, int64 |
 | **functions** |
-| delegates | int delegate(int, int) | proc (a, b: int): int {.closure.} |
+| delegates | `int delegate(int, int)` | `proc (a, b: int): int {.closure.}` |
 | **decl** |
-| variable decl | auto a=foo; | var a=foo |
-| immutable decl | immutable foo=bar; | let foo=bar |
-| compile time decl | enum foo=bar; | const foo=bar |
+| variable decl | `auto a=foo;` | `var a=foo` |
+| immutable decl | `immutable foo=bar;` | `let foo=bar` |
+| compile time decl | `enum foo=bar;` | `const foo=bar` |
 | **attributes** |
 | purity | `pure` | `{.noSideEffect.}` |
 | nothrow | `nothrow` | `{.raises: [].}` |
@@ -150,7 +150,7 @@ See also libraries.md
 | float.init | NaN | 0 |
 | file | `__FILE__` | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
 | **traits** |
-| expr compiles? | __traits(compiles, expr) | compiles(expr) |
+| does expr compile | `__traits(compiles, expr)` | `compiles(expr)` |
 | **library** |
 | universal type conversion | a.to!T | no: https://github.com/nim-lang/Nim/issues/7430 |
 | **cmd line** |
