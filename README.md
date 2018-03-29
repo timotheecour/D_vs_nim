@@ -114,7 +114,9 @@ See also libraries.md
 | string import | import("foo"); requires `-J` for security | staticRead("foo") |
 | public import | public import foo; | import foo; export foo; |
 | static import | static import foo; | from foo import nil |
+| **syntax:exceptions** |
 | scope guards | `scope(exit) foo`, `scope(success) foo`, `scope(failure) foo`,  | `defer: foo`, ? , ? |
+| try throw catch finally | <code>try{throw new Exception("bar");}<br>catch(Exception e) {writeln(e);}<br>finally {}<code>  | <code>try: raise newException(IOError, "test exception")<br>except IOError: (let e = (ref IOError)(getCurrentException()); echo e[])<br>finally: discard<code> |
 | **syntax:array** |
 | static array literal | int[2] a = [1,2]; | var a = [1,2] |
 | dynamic array literal | auto a = [1,2]; | var a = @[1,2] |
