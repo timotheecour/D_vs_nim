@@ -114,7 +114,7 @@ See also libraries.md
 | string import | import("foo"); requires `-J` for security | staticRead("foo") |
 | public import | public import foo; | import foo; export foo; |
 | static import | static import foo; | from foo import nil |
-| scope guards | `scope(exit) foo` etc | `defer: foo` |
+| scope guards | `scope(exit) foo`, `scope(success) foo`, `scope(failure) foo`,  | `defer: foo`, ? , ? |
 | **syntax:array** |
 | static array literal | int[2] a = [1,2]; | var a = [1,2] |
 | dynamic array literal | auto a = [1,2]; | var a = @[1,2] |
@@ -135,13 +135,13 @@ See also libraries.md
 | **decl** |
 | variable decl | auto a=foo; | var a=foo |
 | immutable decl | immutable foo=bar; | let foo=bar |
-| compile time decl | enum foo=bar | const foo=bar |
+| compile time decl | enum foo=bar; | const foo=bar |
 | **attributes** |
 | purity | `pure` | `{.noSideEffect.}` |
 | nothrow | `nothrow` | `{.raises: [].}` |
 | safe | `@safe` | ? |
 | GC free | `@nogc` | ? |
-| lockfree | ? | locks:0 |
+| lockfree | ? | `{.locks:0.}` |
 | **language** |
 | unit tests | `unittest{stmt}` | https://nim-lang.org/docs/unittest.html |
 | **semantics** |
