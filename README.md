@@ -185,7 +185,12 @@ See also libraries.md
 * are there real immutable variables in nim ?
 A: https://www.reddit.com/r/nim/comments/2w32oi/immutability_in_nim/
 * how to specify immutable inside `for(foo in bar)` ?
-A: for foo in bar: let foo = foo
+A: immutability depends on iterator and by default iterators return immutable values.
+```
+var a = @[1, 2, 3, 4]
+for item in a: item += 5  # compile-time error
+for item in mitems(a):  item += 5  # ok
+```
 
 ## no longer valid points
 https://forum.nim-lang.org/t/1779/1#11314 => dmd backend license was changed recently
