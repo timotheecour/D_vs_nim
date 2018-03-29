@@ -65,9 +65,9 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 | **doc** |
 | builtin doc | ddoc (noisy and nonstandard) | reStructuredText eg `  ## removes `n` from `L`. Efficiency: O(1).` (eg: https://nim-lang.org/docs/lists.html) | -1 |
 | **metaprogramming** |
-| variadic templates | yes: void fun(T...)(T a) | no; [RFC: Variadic Generics](https://github.com/nim-lang/Nim/issues/1019); but `varargs[untyped]` allowed in macros; not same though, eg can't be used in template functions | 1 |
-| supported template parameters | type, alias, constant | ? | ? |
-| macro | no | hygienic macro system instead of string mixin; string mixin are available through `parseStmt`. The macros modify directly the abstract syntax tree given by the parser, before the compiler pass. It is possible to implement new DSLs or even a new language with a syntax different from Nim based on the macro system: example Smalltalk-like language (Spry)[http://sprylang.org/]| -1 |
+| variadic generics | yes: void fun(T...)(T a) | no; [RFC: Variadic Generics](https://github.com/nim-lang/Nim/issues/1019); but `varargs[untyped]` allowed in macros; not same though, eg can't be used in template functions | 1 |
+| supported generic parameters | type, alias, constant | ? | ? |
+| macro | no | hygienic macro system instead of string mixin; string mixin are available through `parseStmt`. The macros modify directly the abstract syntax tree given by the parser, before the compiler pass. It is possible to implement new DSLs based on the macro system: for example webserver DSL [jester](https://github.com/dom96/jester/) | -1 |
 | **backend** |
 | available backends | custom (dmd), gcc (gdc), llvm (ldc) | C, C++, js; WIP llvm (https://github.com/arnetheduck/nlvm) | ? |
 
@@ -105,18 +105,19 @@ See also libraries.md
 | empty statement | {} | discard |
 | **syntax:parsing** |
 | string mixin | `mixin("1+1")` | `stringMixinLikeInD("1+1")` with: `macro stringMixinLikeInD(s: static[string]): untyped = parseStmt(s)` source: https://forum.nim-lang.org/t/1779/2#19060 |
-| UFCS | foo(a, b), a.foo(b) | foo(a, b), a.foo(b), a.foo b, foo a b |
+| UFCS | foo(a, b), a.foo(b) | foo(a, b), a.foo(b), a.foo b, foo a, b |
 | expr without parenthesis | `auto a=fun;` calls `fun` | `var a=fun` returns `fun` |
 | UFCS expr without parenthesis | `auto a=b.fun;` calls `fun` | `var a=b.fun` calls `fun` |
 | static if .. else if .. else| static if(foo1) bar1 else if(foo2) bar2 else bar3 | when foo1: bar1 elif foo2:bar2 else:bar3  |
 | conditional compilation | version(OSX) | when defined(macosx) |
 | compile time if | static if | when |
 | string import | import("foo"); requires `-J` for security | staticRead("foo") |
-| public import | public import foo; | ? |
-| scope guards | `scope(exit) foo` etc | `finally: foo` (https://forum.nim-lang.org/t/141) |
+| public import | public import foo; | import foo; export foo; |
+| static import | static import foo; | from foo import nil |
+| scope guards | `scope(exit) foo` etc | `defer: foo` |
 | **syntax:array** |
-| static array litteral | int[2] a = [1,2]; | var a = [1,2] |
-| dynamic array litteral | auto a = @[1,2]; | var a = @[1,2] |
+| static array literal | int[2] a = [1,2]; | var a = [1,2] |
+| dynamic array literal | auto a = [1,2]; | var a = @[1,2] |
 | dynamic array create | auto a = new int[2]; | var a = newSeq[int](2) |
 | empty dynamic array | auto a = []; | var a:seq[int] = @[] |
 | indexing slice of a | a[1..$-1], a[1..3] | a[1..^2], a[1..<3] |
@@ -130,14 +131,14 @@ See also libraries.md
 | pointer sized int, uint | ptrdiff_t, size_t | int, uint |
 | sized ints | byte, short, int, long | int8, int16, int32, int64 |
 | **functions** |
-| delegates | yes | yes |
+| delegates | int delegate(int, int) | proc (a, b: int): int {.closure.} |
 | **decl** |
-| variable decl | auto a=foo | var a=foo |
+| variable decl | auto a=foo; | var a=foo |
 | immutable decl | immutable foo=bar; | let foo=bar |
 | compile time decl | enum foo=bar | const foo=bar |
 | **attributes** |
-| purity | `pure` | `.noSideEffect` |
-| nothrow | `nothrow` | ? |
+| purity | `pure` | `{.noSideEffect.}` |
+| nothrow | `nothrow` | `{.raises: [].}` |
 | safe | `@safe` | ? |
 | GC free | `@nogc` | ? |
 | lockfree | ? | locks:0 |
@@ -170,7 +171,6 @@ See also libraries.md
 * https://forum.nim-lang.org/t/1983#12391 A few questions about Nim
 
 ## nim questions
-* how to specify immutable inside `for(foo in bar)` ?
 * does it have dfmt equivalent?
 * can we modify a slice of an immutable array declared by 'let'?
 * how to use global variables? (cf http://gradha.github.io/articles/2015/02/goodbye-nim-and-good-luck.html)
@@ -179,7 +179,9 @@ See also libraries.md
 
 ## nim questions (answered)
 * are there real immutable variables in nim ?
-A:https://www.reddit.com/r/nim/comments/2w32oi/immutability_in_nim/
+A: https://www.reddit.com/r/nim/comments/2w32oi/immutability_in_nim/
+* how to specify immutable inside `for(foo in bar)` ?
+A: for foo in bar: let foo = foo
 
 ## no longer valid points
 https://forum.nim-lang.org/t/1779/1#11314 => dmd backend license was changed recently
