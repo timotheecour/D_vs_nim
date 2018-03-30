@@ -20,7 +20,8 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | **OOP** |
 | design | Java like | allows multi-method dynamic dispatch (defined outside, avoiding kitchen sink classes) | -1 |
 | **syntax** |
-| allows local imports | yes | | 1 |
+| allows local imports | yes | no | 1 |
+| import order irrelevant | yes | ? | 1 |
 | mutually recursive imports | yes | no, compile-time error. you can use forward declaration and/or "mixin foosymbol" to tell the compiler that a symbol will be visible at one point (CHECKME); see also: https://stackoverflow.com/questions/30235080/cannonical-way-to-do-circular-dependency-in-nim, https://github.com/nim-lang/Nim/issues/3961, https://forum.nim-lang.org/t/2114; workaround: The lack of cyclic dependencies in Nim is usually worked around by having a types module | 1 |
 | mutually recursive types | yes | these types can only be declared within a single type section (else would require arbitrary symbol lookahead which slows down compilation.) | 1 |
 | familiarity | C-like | C or Python-like | 0 |
@@ -71,6 +72,7 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 | **metaprogramming** |
 | variadic generics | yes: void fun(T...)(T a) | no; [RFC: Variadic Generics](https://github.com/nim-lang/Nim/issues/1019); but `varargs[untyped]` allowed in macros; not same though, eg can't be used in template functions | 1 |
 | supported generic parameters | type, alias, constant | ? | ? |
+| template constraint | `void fun(T)(T a) if(isFoo(T))` | ? | ? |
 | macro | no | hygienic macro system instead of string mixin; string mixin are available through `parseStmt`. The macros modify directly the abstract syntax tree given by the parser, before the compiler pass. It is possible to implement new DSLs based on the macro system: for example webserver DSL [jester](https://github.com/dom96/jester/) | -1 |
 | **backend** |
 | available backends | custom (dmd), gcc (gdc), llvm (ldc) | C, C++, js; WIP llvm (https://github.com/arnetheduck/nlvm) | ? |
@@ -119,7 +121,7 @@ See also libraries.md
 | public import | `public import foo;` | `import foo; export foo;` |
 | static import | `static import foo;` | `from foo import nil` |
 | **syntax:exceptions** |
-| scope guards | `scope(exit) foo`, `scope(success) foo`, `scope(failure) foo`,  | `defer: foo`, ? , ? |
+| scope guards | `scope(exit) foo`, `scope(success) foo`, `scope(failure) foo`,  | `defer: foo`, ? , ? ; see also https://forum.nim-lang.org/t/141/1#23104 |
 | try throw catch finally | <code>try{throw new Exception("bar");}<br>catch(Exception e) {writeln(e);}<br>finally {}<code>  | <code>try: raise newException(IOError, "test exception")<br>except IOError: (let e = (ref IOError)(getCurrentException()); echo e[])<br>finally: discard<code> |
 | **syntax:array** |
 | static array literal | `int[2] a = [1,2];` | `var a = [1,2]` |
@@ -157,11 +159,13 @@ See also libraries.md
 | does expr compile | `__traits(compiles, expr)` | `compiles(expr)` |
 | **library** |
 | universal type conversion | a.to!T | no: https://github.com/nim-lang/Nim/issues/7430 |
+| path append | a.buildPath(b) | a / b ; does right thing on windows; NOTE: if b is absolute, buildPath returns b unlike nim |
 | **cmd line** |
 | custom define | -version=foo | --define:foo or --define:foo=bar |
 | **resources** |
 | tutorials | https://tour.dlang.org/ | https://nim-lang.org/docs/tut1.html |
 | **tools** |
+| caching compiler | rdmd | nim (compiles dependencies); https://github.com/Jeff-Ciesielski/nimr (subset of functionality) |
 | find declaration | dscanner --declaration | nimgrep (but no declaration search, cf https://github.com/nim-lang/Nim/issues/7419) |
 | fix code | dfix | nimfix |
 | package manager | dub | nimble |
@@ -178,11 +182,10 @@ See also libraries.md
 * https://digitalmars.com/d/archives/digitalmars/D/D_and_Nim_251571.html
 * https://forum.nim-lang.org/t/1983#12391 A few questions about Nim
 
-## nim questions
+## nim questions (besides entries marked above with `?`)
 * does it have dfmt equivalent?
 * can we modify a slice of an immutable array declared by 'let'?
 * how to use global variables? (cf http://gradha.github.io/articles/2015/02/goodbye-nim-and-good-luck.html)
-* rdmd equivalent?
 * how to search for symbols `fooBar` given that nim allows foobar fooBar foo_bar etc?
 
 ## nim questions (answered)
