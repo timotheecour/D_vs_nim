@@ -28,4 +28,7 @@ parallel:
 * test whether import order matters
 * how to list all functions(reflection)
 * `var a,b:int` ok but not `fun((a,b:int)=>a+b)` ?
+* how to do nested types? cf D20180330T115220
+* how to do `hasField!(T, "foo")` ? cf https://forum.nim-lang.org/t/3655 Compile-time type reflection API?
+* could concepts match error show which definition failed?
 * 

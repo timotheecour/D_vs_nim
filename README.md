@@ -72,7 +72,7 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 | **metaprogramming** |
 | variadic generics | yes: void fun(T...)(T a) | no; [RFC: Variadic Generics](https://github.com/nim-lang/Nim/issues/1019); but `varargs[untyped]` allowed in macros; not same though, eg can't be used in template functions | 1 |
 | supported generic parameters | type, alias, constant | ? | ? |
-| template constraint | `void fun(T)(T a) if(isFoo(T))` | ? | ? |
+| template constraint | `void fun(T)(T a) if(isFoo!T)` | concepts are simpler to use: `type isFoo = concept a (...); proc fun(a: isFoo)` | -1 |
 | macro | no | hygienic macro system instead of string mixin; string mixin are available through `parseStmt`. The macros modify directly the abstract syntax tree given by the parser, before the compiler pass. It is possible to implement new DSLs based on the macro system: for example webserver DSL [jester](https://github.com/dom96/jester/) | -1 |
 | **backend** |
 | available backends | custom (dmd), gcc (gdc), llvm (ldc) | C, C++, js; WIP llvm (https://github.com/arnetheduck/nlvm) | ? |
