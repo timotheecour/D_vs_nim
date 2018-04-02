@@ -22,6 +22,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | **syntax** |
 | allows local imports | yes | no | 1 |
 | import order irrelevant | yes | ? | 1 |
+| package modules (allows backward compatible breaking of module into package) | yes: https://dlang.org/spec/module.html#package-module | ? | ? |
 | mutually recursive imports | yes | no, compile-time error. you can use forward declaration and/or "mixin foosymbol" to tell the compiler that a symbol will be visible at one point (CHECKME); see also: https://stackoverflow.com/questions/30235080/cannonical-way-to-do-circular-dependency-in-nim, https://github.com/nim-lang/Nim/issues/3961, https://forum.nim-lang.org/t/2114; workaround: The lack of cyclic dependencies in Nim is usually worked around by having a types module | 1 |
 | mutually recursive types | yes | these types can only be declared within a single type section (else would require arbitrary symbol lookahead which slows down compilation.) | 1 |
 | familiarity | C-like | C or Python-like | 0 |
@@ -131,6 +132,7 @@ See also libraries.md
 | indexing slice of a | `a[1..$-1], a[1..3]` | `a[1..^2], a[1..<3]` |
 | length | `a.length;` | `a.len` |
 | **types** |
+| initial value of type | `T.init` (known at CT) | ? |
 | type of | `typeof(expr)` | `expr.type` |
 | type name | `T.stringof` (builtin) | `T.name` (import typetraits) |
 | class | `class A : B` | `type A = ref object of B` |
@@ -152,11 +154,15 @@ See also libraries.md
 | lockfree | ? | `{.locks:0.}` |
 | **language** |
 | unit tests | `unittest{stmt}` | https://nim-lang.org/docs/unittest.html |
+| constructor | `T(args)` | ad-hoc: `newT(args)`, but see https://github.com/nim-lang/Nim/issues/7474 |
 | **semantics** |
 | float.init | NaN | 0 |
 | file | `__FILE__` | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
 | **traits** |
 | does expr compile | `__traits(compiles, expr)` | `compiles(expr)` |
+| get fields | `T.tupleof` | ? |
+| **metaprogramming** |
+| static assert | `static assert(foo);` | `static: assert foo` |
 | **library** |
 | universal type conversion | a.to!T | no: https://github.com/nim-lang/Nim/issues/7430 |
 | path append | a.buildPath(b) | a / b ; does right thing on windows; NOTE: if b is absolute, buildPath returns b unlike nim |
@@ -187,6 +193,7 @@ See also libraries.md
 * can we modify a slice of an immutable array declared by 'let'?
 * how to use global variables? (cf http://gradha.github.io/articles/2015/02/goodbye-nim-and-good-luck.html)
 * how to search for symbols `fooBar` given that nim allows foobar fooBar foo_bar etc?
+* instead of `newSeq` could we write `new!Seq` or new[Seq] or anything else that's generic and doesn't pollute namespace?
 
 ## nim questions (answered)
 * are there real immutable variables in nim ?

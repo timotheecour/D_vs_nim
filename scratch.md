@@ -31,4 +31,21 @@ parallel:
 * how to do nested types? cf D20180330T115220
 * how to do `hasField!(T, "foo")` ? cf https://forum.nim-lang.org/t/3655 Compile-time type reflection API?
 * could concepts match error show which definition failed?
-* 
+
+## nim questions (with answers)
+
+how would I translate this from D to Nim?
+
+`void fun(T)(T a) if (isFoo!T){...}`
+
+`isFoo` could be any kind of contraint on T, eg see https://dlang.org/phobos/std_traits.html for some standard ones (eg: `isSigned` to only match signed integral types)
+This pattern is used all over D code, allowing for eg duck typing or providing specialized implementations depending on arbitrary properties of T.
+
+A: IIRC, `proc fun[T](T a):auto = ...`  uses generic polymorphism and doesn't allow overloading
+but this seems to work:
+```nim
+type isFoo = concept a
+  # etc
+proc fun(a: isFoo)
+```
+
