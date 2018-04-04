@@ -22,7 +22,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | **syntax** |
 | allows local imports | yes | no | 1 |
 | import order irrelevant | yes | ? | 1 |
-| package modules (allows backward compatible breaking of module into package) | yes: https://dlang.org/spec/module.html#package-module | ? | ? |
+| package modules (allows backward compatible breaking of module into package) | yes: https://dlang.org/spec/module.html#package-module | yes but see https://github.com/timotheecour/D_vs_nim/issues/22 | 0 |
 | mutually recursive imports | yes | no, compile-time error. you can use forward declaration and/or "mixin foosymbol" to tell the compiler that a symbol will be visible at one point (CHECKME); see also: https://stackoverflow.com/questions/30235080/cannonical-way-to-do-circular-dependency-in-nim, https://github.com/nim-lang/Nim/issues/3961, https://forum.nim-lang.org/t/2114; workaround: The lack of cyclic dependencies in Nim is usually worked around by having a types module | 1 |
 | familiarity | C-like | C or Python-like | 0 |
 | interpolated strings | no | yes | -1 |
@@ -74,7 +74,7 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 | builtin doc | ddoc (noisy and nonstandard) | reStructuredText eg `  ## removes `n` from `L`. Efficiency: O(1).` (eg: https://nim-lang.org/docs/lists.html) | -1 |
 | **metaprogramming** |
 | variadic generics | yes: void fun(T...)(T a) | no; [RFC: Variadic Generics](https://github.com/nim-lang/Nim/issues/1019); but `varargs[untyped]` allowed in macros; not same though, eg can't be used in template functions | 1 |
-| supported generic parameters | type, alias, constant | ? | ? |
+| supported generic parameters | type, alias, constant | type, alias, constant | 0 |
 | template constraint | `void fun(T)(T a) if(isFoo!T)` | concepts are simpler to use: `type isFoo = concept a (...); proc fun(a: isFoo)` | -1 |
 | macro | no | hygienic macro system instead of string mixin; string mixin are available through `parseStmt`. The macros modify directly the abstract syntax tree given by the parser, before the compiler pass. It is possible to implement new DSLs based on the macro system: for example webserver DSL [jester](https://github.com/dom96/jester/) | -1 |
 | **backend** |
@@ -89,6 +89,10 @@ tuples, named arguments, string interpolation, in-place struct initialization, U
 assert diagnostics, static break
 * these are sort of available:
 Static inheritance
+
+## compilation time
+* https://forum.nim-lang.org/t/1372
+* tcc instead of clang (but not on OSX, see https://github.com/wheineman/nrpl/issues/16)
 
 ## runtime performance
 
@@ -127,13 +131,14 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | string mixin | `mixin("1+1")` | `stringMixinLikeInD("1+1")` with: `macro stringMixinLikeInD(s: static[string]): untyped = parseStmt(s)` source: https://forum.nim-lang.org/t/1779/2#19060 |
 | UFCS | foo(a, b), a.foo(b) | foo(a, b), a.foo(b), a.foo b, foo a, b |
 | expr without parenthesis | `auto a=fun;` calls `fun` | `var a=fun` returns `fun` |
-| UFCS expr without parenthesis | `auto a=b.fun;` calls `fun` | `var a=b.fun` calls `fun` |
+| UFCS expr without parenthesis | `auto a=b.fun;` calls `fun` | `var a=b.fun` calls `fun` (when b is arg, not module) |
 | static if .. else if .. else| `static if(foo1) bar1 else if(foo2) bar2 else bar3` | `when foo1: bar1 elif foo2:bar2 else:bar3`  |
 | conditional compilation | `version(OSX)` | `when defined(macosx)` |
 | compile time if | `static if` | `when` |
 | string import | `import("foo");` requires `-J` for security | `staticRead("foo")` |
 | public import | `public import foo;` | `import foo; export foo;` |
 | static import | `static import foo;` | `from foo import nil` |
+| package fully qualified access | `pkg.mod.symbol();` | `symbol()` (`pkg.mod.symbol` illegal) |
 | **syntax:exceptions** |
 | scope guards | `scope(exit) foo`, `scope(success) foo`, `scope(failure) foo`,  | `defer: foo`, ? , ? ; see also https://forum.nim-lang.org/t/141/1#23104 |
 | try throw catch finally | <code>try{throw new Exception("bar");}<br>catch(Exception e) {writeln(e);}<br>finally {}<code>  | <code>try: raise newException(IOError, "test exception")<br>except IOError: (let e = (ref IOError)(getCurrentException()); echo e[])<br>finally: discard<code> |
