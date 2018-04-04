@@ -185,7 +185,7 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | **resources** |
 | tutorials | https://tour.dlang.org/ | https://nim-lang.org/docs/tut1.html |
 | **tools** |
-| caching compiler | rdmd | nim (compiles dependencies); https://github.com/Jeff-Ciesielski/nimr (subset of functionality) |
+| caching compiler | rdmd | nim (compiles dependencies; only compiles changed file by default); https://github.com/Jeff-Ciesielski/nimr (subset of functionality) |
 | find declaration | dscanner --declaration | nimgrep (but no declaration search, cf https://github.com/nim-lang/Nim/issues/7419) |
 | fix code | dfix | nimfix |
 | package manager | dub | nimble |
@@ -204,7 +204,6 @@ See also libraries.md
 
 ## nim questions (besides entries marked above with `?`)
 * does it have dfmt equivalent?
-* can we modify a slice of an immutable array declared by 'let'?
 * instead of `newSeq` could we write `new!Seq` or new[Seq] or anything else that's generic and doesn't pollute namespace?
 * is there a robust way to write complex nim functions as a one liner (eg, for use in 1 line docs, in REPL etc); ideally by replacing indentation with braces
 
@@ -223,6 +222,9 @@ A: nimgrep; also: Nim provides "nimsuggest" that can be used for vim, emacs, vsc
 
 * how to use global variables? (cf http://gradha.github.io/articles/2015/02/goodbye-nim-and-good-luck.html)
 A: Non-const global vars are not allowed in proc tagged noSideEffects and care must be used if accessed from multiple threads but there is nothing special about them otherwise.
+
+* can we modify a slice of an immutable array declared by 'let'?
+A: Slicing doesn't return a var T for let arrays so you can't. Note that immutability for stack objects/array/types is deep but for ref/ptr types it is shallow, it means that the memory address pointed to cannot be modified but the content can.
 
 ## no longer valid points
 https://forum.nim-lang.org/t/1779/1#11314 => dmd backend license was changed recently
