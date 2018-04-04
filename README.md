@@ -205,7 +205,6 @@ See also libraries.md
 ## nim questions (besides entries marked above with `?`)
 * does it have dfmt equivalent?
 * can we modify a slice of an immutable array declared by 'let'?
-* how to use global variables? (cf http://gradha.github.io/articles/2015/02/goodbye-nim-and-good-luck.html)
 * instead of `newSeq` could we write `new!Seq` or new[Seq] or anything else that's generic and doesn't pollute namespace?
 * is there a robust way to write complex nim functions as a one liner (eg, for use in 1 line docs, in REPL etc); ideally by replacing indentation with braces
 
@@ -221,6 +220,9 @@ for item in mitems(a):  item += 5  # ok
 ```
 * how to search for symbols `fooBar` given that nim allows foobar fooBar foo_bar etc?
 A: nimgrep; also: Nim provides "nimsuggest" that can be used for vim, emacs, vscode, atom that autocompletes
+
+* how to use global variables? (cf http://gradha.github.io/articles/2015/02/goodbye-nim-and-good-luck.html)
+A: Non-const global vars are not allowed in proc tagged noSideEffects and care must be used if accessed from multiple threads but there is nothing special about them otherwise.
 
 ## no longer valid points
 https://forum.nim-lang.org/t/1779/1#11314 => dmd backend license was changed recently
