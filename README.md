@@ -45,7 +45,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | community | larger |  | 1 |
 | **interop** |
 | C++ | Calpypso (ldc fork) allows direct C++ integration |  | 1 |
-| C++ |  | C/C++ code generation giving us much better interop than what D offers. Case in point: Converting to cstring doesn't require an allocation and copy | -1 |
+| C++ |  | C/C++ code generation giving us much better interop than what D offers. Case in point: Converting to cstring doesn't require an allocation and copy; see also https://github.com/timotheecour/D_vs_nim/issues/12 | -1 |
 | can compile to js | | yes | -1 |
 | direct use | no | Nim emits C code and you can break in with emit pragma; C code doesn't have to be written outside nim file | -1 |
 | **library** |
@@ -97,6 +97,8 @@ Static inheritance
 | functional: [Zero_functional](https://github.com/alehander42/zero-functional); Zero_functional fuses loop at compile-time when chaining zip.map.filter.reduce functional constructs | ? (missing D entry) | nim is currently number 1 or 2 against 9 other langs. The other number 2 or 1 lang being Rust. | ? |
 | webserver | ? | [Mofuw](https://github.com/2vg/mofuw) by @2vg is faster than tokio-minihttp, the current \#1 on TechEmpower benchmark | ? |
 | parsing csv files | [csv-blog-d](https://dlang.org/blog/2017/05/24/faster-command-line-tools-in-d/) | [csv-blog-nim](https://nim-lang.org/blog/2017/05/25/faster-command-line-tools-in-nim.html); D and Nim had the same speed and same compilation time. fastest CSV parser (to parse GBs of machine learning datasets) is [XSV](https://github.com/BurntSushi/xsv) in Rust | 0 |
+
+See also https://github.com/timotheecour/D_vs_nim/issues/11
 
 ## similar code comparison
 
