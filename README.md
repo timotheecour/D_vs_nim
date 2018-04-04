@@ -24,11 +24,13 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | import order irrelevant | yes | ? | 1 |
 | package modules (allows backward compatible breaking of module into package) | yes: https://dlang.org/spec/module.html#package-module | ? | ? |
 | mutually recursive imports | yes | no, compile-time error. you can use forward declaration and/or "mixin foosymbol" to tell the compiler that a symbol will be visible at one point (CHECKME); see also: https://stackoverflow.com/questions/30235080/cannonical-way-to-do-circular-dependency-in-nim, https://github.com/nim-lang/Nim/issues/3961, https://forum.nim-lang.org/t/2114; workaround: The lack of cyclic dependencies in Nim is usually worked around by having a types module | 1 |
-| mutually recursive types | yes | these types can only be declared within a single type section (else would require arbitrary symbol lookahead which slows down compilation.) | 1 |
 | familiarity | C-like | C or Python-like | 0 |
 | interpolated strings | no | yes | -1 |
 | named parameter arguments | no | yes | -1 |
 | style | (subjective opinion) https://dlang.org/dstyle.html ; style guide for phobos takes too much vertical whitespace (eg braces on their own line) | [Nim Enhancement Proposal #1](https://nim-lang.org/docs/nep1.html) | 0 |
+| **types** |
+| mutually recursive types | yes | these types can only be declared within a single type section (else would require arbitrary symbol lookahead which slows down compilation.) | 1 |
+| nested types | yes | no; but see https://github.com/nim-lang/Nim/issues/7449  | 1 |
 | **semantics** |
 | rvalue references | no | ? | ? |
 | attribute inference | for template functions | ? | ? |
@@ -80,6 +82,14 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 
 See also libraries.md
 
+## features requested in latest D survey (https://rawgit.com/wilzbach/state-of-d/master/report.html) that are already supported in Nim
+* From the D survey question "What language features do you miss?", these features are supported in Nim:
+tuples, named arguments, string interpolation, in-place struct initialization, UFCS for local symbols, writing files at compile-time
+* these are doable in library code:
+assert diagnostics, static break
+* these are sort of available:
+Static inheritance
+
 ## runtime performance
 
 | category/benchmark | D | nim | 1 for D, -1 for nim |
@@ -105,6 +115,7 @@ See also libraries.md
 | --- | --- | --- |
 | **syntax:lexical** |
 | nesting block comments | /++/ | #[ ]# |
+| documentation comments | `/** */`` or `/++ +/` or `///` | `##` or `##[ ... ]##` |
 | WYSIWYG string | \`foo\nbar\`, r"foo\nbar", etc | """foo\nbar""", r"foo\nbar", etc(?) |
 | end of file (useful when debugging) | `__EOF__` | ? |
 | increment | i++ | i+=1 or inc(i) |
@@ -134,6 +145,7 @@ See also libraries.md
 | **types** |
 | initial value of type | `T.init` (known at CT) | ? |
 | type of | `typeof(expr)` | `expr.type` |
+| type alias | `alias T2=T;` | `type T2=T` |
 | type name | `T.stringof` (builtin) | `T.name` (import typetraits) |
 | class | `class A : B` | `type A = ref object of B` |
 | struct | `struct A` | `type A = object` |
