@@ -206,8 +206,8 @@ See also libraries.md
 * does it have dfmt equivalent?
 * can we modify a slice of an immutable array declared by 'let'?
 * how to use global variables? (cf http://gradha.github.io/articles/2015/02/goodbye-nim-and-good-luck.html)
-* how to search for symbols `fooBar` given that nim allows foobar fooBar foo_bar etc?
 * instead of `newSeq` could we write `new!Seq` or new[Seq] or anything else that's generic and doesn't pollute namespace?
+* is there a robust way to write complex nim functions as a one liner (eg, for use in 1 line docs, in REPL etc); ideally by replacing indentation with braces
 
 ## nim questions (answered)
 * are there real immutable variables in nim ?
@@ -219,6 +219,8 @@ var a = @[1, 2, 3, 4]
 for item in a: item += 5  # compile-time error
 for item in mitems(a):  item += 5  # ok
 ```
+* how to search for symbols `fooBar` given that nim allows foobar fooBar foo_bar etc?
+A: nimgrep; also: Nim provides "nimsuggest" that can be used for vim, emacs, vscode, atom that autocompletes
 
 ## no longer valid points
 https://forum.nim-lang.org/t/1779/1#11314 => dmd backend license was changed recently
