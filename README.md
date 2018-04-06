@@ -179,7 +179,7 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | file | `__FILE__` | instantiationInfo; limitation: doesn't work for function caller, cf https://github.com/nim-lang/Nim/issues/7406 |
 | **traits** |
 | does expr compile | `__traits(compiles, expr)` | `compiles(expr)` |
-| get fields | `T.tupleof` | ? |
+| get fields | `T.tupleof` | `x.fields` |
 | **metaprogramming** |
 | static assert | `static assert(foo);` | `static: assert foo` |
 | **library** |
@@ -210,7 +210,6 @@ See also libraries.md
 ## nim questions (besides entries marked above with `?`)
 * does it have dfmt equivalent?
 * instead of `newSeq` could we write `new!Seq` or new[Seq] or anything else that's generic and doesn't pollute namespace?
-* is there a robust way to write complex nim functions as a one liner (eg, for use in 1 line docs, in REPL etc); ideally by replacing indentation with braces
 
 ## nim questions (answered)
 * are there real immutable variables in nim ?
@@ -230,6 +229,20 @@ A: Non-const global vars are not allowed in proc tagged noSideEffects and care m
 
 * can we modify a slice of an immutable array declared by 'let'?
 A: Slicing doesn't return a var T for let arrays so you can't. Note that immutability for stack objects/array/types is deep but for ref/ptr types it is shallow, it means that the memory address pointed to cannot be modified but the content can.
+
+* is there a robust way to write complex nim functions as a one liner (eg, for use in 1 line docs, in REPL etc); ideally by replacing indentation with braces
+A: `(st1; st2; st3)`, or undocumented braces syntax skin:
+```nim
+#? braces
+
+proc main() {
+  echo "Hello"
+}
+
+when (isMainModule) {
+  main()
+}
+```
 
 ## no longer valid points
 https://forum.nim-lang.org/t/1779/1#11314 => dmd backend license was changed recently
