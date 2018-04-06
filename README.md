@@ -211,6 +211,17 @@ See also libraries.md
 * does it have dfmt equivalent?
 * instead of `newSeq` could we write `new!Seq` or new[Seq] or anything else that's generic and doesn't pollute namespace?
 
+* how to use templates/macros that require an import?
+eg:
+```
+template foo*() {.dirty.} =
+  # want: import os
+  let programName = getAppFilename()
+  let arguments = commandLineParams()
+```
+
+* how to compose ranges/iterators in Nim?
+
 ## nim questions (answered)
 * are there real immutable variables in nim ?
 A: https://www.reddit.com/r/nim/comments/2w32oi/immutability_in_nim/
