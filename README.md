@@ -220,7 +220,7 @@ template foo*() {.dirty.} =
   let arguments = commandLineParams()
 ```
 
-* how to compose ranges/iterators in Nim?
+* how to compose arbitrary ranges/iterators in Nim?
 
 ## nim questions (answered)
 * are there real immutable variables in nim ?
