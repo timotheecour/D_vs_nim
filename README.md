@@ -74,6 +74,7 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 | builtin doc | ddoc (noisy and nonstandard) | reStructuredText eg `  ## removes `n` from `L`. Efficiency: O(1).` (eg: https://nim-lang.org/docs/lists.html) | -1 |
 | **metaprogramming** |
 | variadic generics | yes: void fun(T...)(T a) | no; [RFC: Variadic Generics](https://github.com/nim-lang/Nim/issues/1019); but `varargs[untyped]` allowed in macros; not same though, eg can't be used in template functions | 1 |
+| partial type template type deduction | yes | no, see https://github.com/nim-lang/Nim/issues/7529 | -1 |
 | supported generic parameters | type, alias, constant | type, alias, constant | 0 |
 | template constraint | `void fun(T)(T a) if(isFoo!T)` | concepts are simpler to use: `type isFoo = concept a (...); proc fun(a: isFoo)` | -1 |
 | macro | no | hygienic macro system instead of string mixin; string mixin are available through `parseStmt`. The macros modify directly the abstract syntax tree given by the parser, before the compiler pass. It is possible to implement new DSLs based on the macro system: for example webserver DSL [jester](https://github.com/dom96/jester/) | -1 |
@@ -128,6 +129,8 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | concatenation | ~ | & |
 | empty statement | {} | discard |
 | **syntax:parsing** |
+| alias | `alias T2=T;` | ?; template, see https://github.com/nim-lang/Nim/issues/7090 |
+| type alias | `alias T2=T;` | `type T2=T` |
 | string mixin | `mixin("1+1")` | `stringMixinLikeInD("1+1")` with: `macro stringMixinLikeInD(s: static[string]): untyped = parseStmt(s)` source: https://forum.nim-lang.org/t/1779/2#19060 |
 | UFCS | foo(a, b), a.foo(b) | foo(a, b), a.foo(b), a.foo b, foo a, b |
 | expr without parenthesis | `auto a=fun;` calls `fun` | `var a=fun` returns `fun` |
@@ -152,13 +155,13 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | **types** |
 | initial value of type | `T.init` (known at CT) | ? |
 | type of | `typeof(expr)` | `expr.type` |
-| type alias | `alias T2=T;` | `type T2=T` |
 | type name | `T.stringof` (builtin) | `T.name` (import typetraits) |
 | class | `class A : B` | `type A = ref object of B` |
 | struct | `struct A` | `type A = object` |
 | float: 32, 64 bit | float, double | float32, float(float64) |
 | pointer sized int, uint | ptrdiff_t, size_t | int, uint |
 | sized ints | byte, short, int, long | int8, int16, int32, int64 |
+| char types | char, wchar, dchar  | ? |
 | **functions** |
 | delegates | `int delegate(int, int)` | `proc (a, b: int): int {.closure.}` |
 | **decl** |
@@ -221,6 +224,9 @@ template foo*() {.dirty.} =
 ```
 
 * how to compose arbitrary ranges/iterators in Nim?
+
+* how to define a slice of type T from ptr + length?
+cf https://github.com/nim-lang/Nim/issues/5437 feature-request pointer size pair, (openArray as value) #5437
 
 ## nim questions (answered)
 * are there real immutable variables in nim ?
