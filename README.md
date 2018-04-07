@@ -4,6 +4,8 @@ Goal: up to date and objective comparison of features between D and nim, and 1:1
 
 NOTE: tables render better (ie full width) with a chrome extension, see https://stackoverflow.com/a/49566642/1426932
 
+NOTE: occasionally, nim code below will use the braces syntax skin to fit in 1 line
+
 Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correcting wrong entries, or adding more (see also other files eg libraries.md).
 
 | category | D | nim | 1 for D, -1 for nim |
@@ -161,7 +163,7 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | float: 32, 64 bit | float, double | float32, float(float64) |
 | pointer sized int, uint | ptrdiff_t, size_t | int, uint |
 | sized ints | byte, short, int, long | int8, int16, int32, int64 |
-| char types | char, wchar, dchar  | ? |
+| char types | char, wchar, dchar  | ?,?,? |
 | **functions** |
 | delegates | `int delegate(int, int)` | `proc (a, b: int): int {.closure.}` |
 | **decl** |
@@ -214,13 +216,9 @@ See also libraries.md
 * does it have dfmt equivalent?
 * instead of `newSeq` could we write `new!Seq` or new[Seq] or anything else that's generic and doesn't pollute namespace?
 
-* how to use templates/macros that require an import?
-eg:
-```
-template foo*() {.dirty.} =
-  # want: import os
-  let programName = getAppFilename()
-  let arguments = commandLineParams()
+* how to use dirty templates/macros that require an import? eg:
+```nim
+template foo*() {.dirty.} { #[want: import os ]# let programName = getAppFilename() }
 ```
 
 * how to compose arbitrary ranges/iterators in Nim?
