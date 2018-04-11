@@ -170,6 +170,9 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | variable decl | `auto a=foo;` | `var a=foo` |
 | immutable decl | `immutable foo=bar;` | `let foo=bar` |
 | compile time decl | `enum foo=bar;` | `const foo=bar` |
+| shared static | `__gshared a = 0;` | `var a {.global.} = 0` ? |
+| static TLS | `static a = 0;` | `var a {.threadvar.} : int` ? ; but see https://github.com/nim-lang/Nim/issues/7565 |
+| ref return | `auto ref fun(ref A a){ return a.x;}` | `proc fun(a:var A):var a.x.type = return a.x` |
 | **attributes** |
 | purity | `pure` | `{.noSideEffect.}` |
 | nothrow | `nothrow` | `{.raises: [].}` |
@@ -199,6 +202,7 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | find declaration | dscanner --declaration | nimgrep (but no declaration search, cf https://github.com/nim-lang/Nim/issues/7419) |
 | fix code | dfix | nimfix |
 | package manager | dub | nimble |
+| install specific compiler versions | digger | choosenim |
 
 See also libraries.md
 
