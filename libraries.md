@@ -16,4 +16,5 @@ https://github.com/nim-lang/needed-libraries
 | web server | https://github.com/vibe-d/vibe.d | https://github.com/2vg/mofuw | ? |
 | human archive files | https://github.com/marler8997/har | ? | 1 |
 | serialization | https://github.com/jacob-carlborg/orange, etc | https://github.com/xomachine/NESM ; https://nim-lang.org/docs/marshal.html | ? |
+| cmd line generator | docopt | https://github.com/c-blake/cligen | -1 |
 
