@@ -69,7 +69,8 @@ but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectiona
 | **implementation** |
 | GC | single shared memory heap that is controlled by its GC, thread safe, fully conservative, stop-the-world | precise, thread-local heaps, a bit more deterministic and a lot faster, you can even timeframe it if you need consistent 60fps for example. Much better GC implementation for soft real-time applications because it can be paused or the max pause can be tuned. Default GC is not thread safe. GC implementation can be switched at compile-time between deferred reference counting with cycle detection (default), mark and sweep, boehm or no GC (memory regions). Untraced heap-allocated manually managed objects are available (nim distinguishes bw ref and ptr: traced references point to objects of a garbage collected heap, untraced references point to manually allocated objects or to objects somewhere else in memory) | -1 |
 | compile speed | faster (via dmd) CHECKME | | 1 |
-| is compiler bootstrapped? | frontend, not yet backend | yes | -1 |
+| is compiler bootstrapped? | frontend, not yet backend | yes, and bootstrapping sources can be regenerated from nim allowing compiler sources to use latest features | -1 |
+| error messages uses poisoning/gagging to avoid spurious errors | yes | ? | ? |
 | binary sizes produced |  | produces smaller binaries | -1 |
 | shared library support | linux:OK; OSX: ldc (not dmd); windows: not OK(CHECKME) ; | anything that can be linked from C | -1 |
 | **doc** |
@@ -152,7 +153,7 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | dynamic array literal | `auto a = [1,2];` | `var a = @[1,2]` |
 | dynamic array create | `auto a = new int[2];` | `var a = newSeq[int](2)` |
 | empty dynamic array | `auto a = [];` | `var a:seq[int] = @[]` |
-| indexing slice of a | `a[1..$-1], a[1..3]` | `a[1..^2], a[1..<3]` |
+| indexing slice of a | `a[1..$], a[1..$-1], a[1..3]` | `a[1..^1], a[1..^2], a[1..<3]` |
 | length | `a.length;` | `a.len` |
 | **types** |
 | initial value of type | `T.init` (known at CT) | ? |
