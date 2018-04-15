@@ -40,7 +40,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | forward declarations allowed? | yes | no; see https://github.com/nim-lang/Nim/issues/5287 | 1 |
 | User defined operators | partial: opCall opSlice, opAssign etc | yes | -1 |
 | User defined attributes | yes | ? | ? |
-| RAII | yes | no? see: [RAII](https://forum.nim-lang.org/t/362/1) | -1 |
+| RAII | yes | no? see: [RAII](https://forum.nim-lang.org/t/362/1) | 1 |
 | **debugging** |
 | **maturity** |
 | stability | few breaking changes in each release | pre 1.0, new releases often make lots of break changes | 1 |
@@ -77,7 +77,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | builtin doc | ddoc (noisy and nonstandard) | reStructuredText eg `  ## removes `n` from `L`. Efficiency: O(1).` (eg: https://nim-lang.org/docs/lists.html) | -1 |
 | **metaprogramming** |
 | variadic generics | yes: void fun(T...)(T a) | no; [RFC: Variadic Generics](https://github.com/nim-lang/Nim/issues/1019); but `varargs[untyped]` allowed in macros; not same though, eg can't be used in template functions | 1 |
-| partial type template type deduction | yes | no, see https://github.com/nim-lang/Nim/issues/7529 | -1 |
+| partial type template type deduction | yes | no, see https://github.com/nim-lang/Nim/issues/7529 | 1 |
 | supported generic parameters | type, alias, constant | type, alias, constant | 0 |
 | template constraint | `void fun(T)(T a) if(isFoo!T)` | concepts are simpler to use: `type isFoo = concept a (...); proc fun(a: isFoo)` | -1 |
 | macro | no | hygienic macro system instead of string mixin; string mixin are available through `parseStmt`. The macros modify directly the abstract syntax tree given by the parser, before the compiler pass. It is possible to implement new DSLs based on the macro system: for example webserver DSL [jester](https://github.com/dom96/jester/) | -1 |
