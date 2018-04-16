@@ -51,8 +51,8 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | can compile to js | | yes | -1 |
 | direct use | no | Nim emits C code and you can break in with emit pragma; C code doesn't have to be written outside nim file | -1 |
 | **library** |
-| ranges | D ranges (implements empty, front, popFront) | yield-based iterators ; maybe simpler to write
-but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectional ranges) | ? |
+| ranges | D ranges (implements empty, front, popFront) | yield-based iterators ; maybe simpler to write but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectional ranges) | ? |
+| variable length arrays | D allows `alloca` | see https://forum.nim-lang.org/t/499 (Variable length array) | ? |
 | **ecosystem** |
 | contributing | PR's languish forever | PR's get merged way faster in nim (see https://github.com/nim-lang/Nim/pulls vs https://github.com/dlang/dmd/pulls or phobos etc but not sure how to quantify objectively; see also https://github.com/nim-lang/Nim/pulse vs https://github.com/dlang/dmd/pulse). QUOTE: Nim is magnitudes of orders easier to contribute to. Not only the compiler code is easier to reason about (at least for me), but PRs are accepted a lot more willingly. I bet such openness of the core devs makes Nim evolution faster and I hope it's gonna stay that way no matter 1.0. | -1 |
 | repo split | dmd,druntime,phobos | single repo for compiler + stdlib making synchronization easier | -1 |
@@ -174,6 +174,7 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | shared static | `__gshared a = 0;` | `var a {.global.} = 0` ? |
 | static TLS | `static a = 0;` | `var a {.threadvar.} : int` ? ; but see https://github.com/nim-lang/Nim/issues/7565 |
 | ref return | `auto ref fun(ref A a){ return a.x;}` | `proc fun(a:var A):var a.x.type = return a.x` |
+| skip initialization | `T a = void;` | `var a {.noInit.}: T` |
 | **attributes** |
 | purity | `pure` | `{.noSideEffect.}` |
 | nothrow | `nothrow` | `{.raises: [].}` |
