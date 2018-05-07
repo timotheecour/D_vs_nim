@@ -172,7 +172,7 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | immutable decl | `immutable foo=bar;` | `let foo=bar` |
 | compile time decl | `enum foo=bar;` | `const foo=bar` |
 | shared static | `__gshared a = 0;` | `var a {.global.} = 0` ? |
-| static TLS | `static a = 0;` | `var a {.threadvar.} : int` ? ; but see https://github.com/nim-lang/Nim/issues/7565 |
+| static TLS | `static a = 0;` | `var a {.threadvar.} : int` |
 | ref return | `auto ref fun(ref A a){ return a.x;}` | `proc fun(a:var A):var a.x.type = return a.x` |
 | skip initialization | `T a = void;` | `var a {.noInit.}: T` |
 | **attributes** |
