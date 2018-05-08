@@ -58,10 +58,10 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | repo split | dmd,druntime,phobos | single repo for compiler + stdlib making synchronization easier | -1 |
 | github history | highly intertwined (uses merges) | almost linear (guessing it rebases) | -1 |
 | issue tracker | bugzilla (issues.dlang.org) | github issues (https://github.com/nim-lang/Nim/issues) | -1 |
-| opened/closed bugs | 4563/13906 (https://dlang.org/bugstats.html)  | 1230/3263 https://github.com/nim-lang/Nim/issues | ? |
+| opened/closed bugs | 4588/14061 (https://dlang.org/bugstats.html)  | 1296/3437 https://github.com/nim-lang/Nim/issues | ? |
 | **packages** |
 | packages | dub: https://code.dlang.org/ | nimble: https://nimble.directory/packages.xml and https://github.com/nim-lang/packages | 0 |
-| number of packages | 1247 | 639 | 1 |
+| number of packages | 1296 | 670 | 1 |
 | **tooling** |
 | format code | `dfmt --inplace` | nimpretty, not yet ready: https://github.com/nim-lang/Nim/issues/7420 | 1 |
 | code reduction for bugs | dustmite | ? | 1 |
