@@ -65,7 +65,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | opened/closed bugs | 4588/14061 (https://dlang.org/bugstats.html)  | 1296/3437 https://github.com/nim-lang/Nim/issues | ? |
 | **packages** |
 | packages | dub: https://code.dlang.org/ | nimble: https://nimble.directory/packages.xml and https://github.com/nim-lang/packages | 0 |
-| number of packages (as of 2018/07/13) | 1346 (http://code.dlang.org/) | 704 ( `nimble list | grep '\burl:' | wc -l`) | 1 |
+| number of packages (as of 2018/07/13) | 1346 (http://code.dlang.org/) | 704 (`nimble list` ) | 1 |
 | **tooling** |
 | format code | `dfmt --inplace` | `nimpretty`, not yet ready: https://github.com/nim-lang/Nim/issues/7420 | 1 |
 | code reduction for bugs | dustmite | pending https://github.com/nim-lang/Nim/issues/8276 | 1 |
