@@ -17,6 +17,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | **CTFE** |
 | engine | AST interpreter. every expression encountered will allocate one or more AST nodes. Within a tight loop, the interpreter can easily generate over 100_000_000 nodes and eat a few gigabytes of RAM. That can exhaust memory quite quickly. Future work: https://dlang.org/blog/2017/04/10/the-new-ctfe-engine/ | uses a register VM (also the basis of Nimscript); faster | -1 |
 | FFI during CTFE | no | no | 0 |
+| embed directly C/C++ code | no | yes: `emit` | -1 |
 | can read/write/exec during CTFE | read only (string import) | yes; allows filesystem access via staticRead and staticExec;  | -1 |
 | other CTFE limitations | ? | Heap allocated compile-time variables are turned into immutable static/const at runtime. | ? |
 | **OOP** |
@@ -50,9 +51,12 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | C++ |  | C/C++ code generation giving us much better interop than what D offers. Case in point: Converting to cstring doesn't require an allocation and copy; see also https://github.com/timotheecour/D_vs_nim/issues/12 | -1 |
 | can compile to js | | yes | -1 |
 | direct use | no | Nim emits C code and you can break in with emit pragma; C code doesn't have to be written outside nim file | -1 |
-| **library** |
+| **standard library** |
 | ranges | D ranges (implements empty, front, popFront) | yield-based iterators ; maybe simpler to write but less efficient? not as flexible? (eg: can't do infinite ranges, bidirectional ranges) | ? |
 | variable length arrays | D allows `alloca` | see https://forum.nim-lang.org/t/499 (Variable length array) | ? |
+| slices form pointer + length | builtin, `T[]` | pending https://github.com/nim-lang/Nim/issues/5753 or https://github.com/nim-lang/Nim/issues/8256 | 1 |
+| strings are built from arrays | yes, `immutable(char)[]` | no, different type, so less generic API's | 1 |
+| lazy functional programming (eg map, filter) | yes, eg `std.algorithm` | no (pending https://github.com/nim-lang/Nim/issues/3837, https://github.com/nim-lang/Nim/issues/8188) | 1 |
 | **ecosystem** |
 | contributing | PR's languish forever | PR's get merged way faster in nim (see https://github.com/nim-lang/Nim/pulls vs https://github.com/dlang/dmd/pulls or phobos etc but not sure how to quantify objectively; see also https://github.com/nim-lang/Nim/pulse vs https://github.com/dlang/dmd/pulse). QUOTE: Nim is magnitudes of orders easier to contribute to. Not only the compiler code is easier to reason about (at least for me), but PRs are accepted a lot more willingly. I bet such openness of the core devs makes Nim evolution faster and I hope it's gonna stay that way no matter 1.0. | -1 |
 | repo split | dmd,druntime,phobos | single repo for compiler + stdlib making synchronization easier | -1 |
@@ -61,10 +65,10 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | opened/closed bugs | 4588/14061 (https://dlang.org/bugstats.html)  | 1296/3437 https://github.com/nim-lang/Nim/issues | ? |
 | **packages** |
 | packages | dub: https://code.dlang.org/ | nimble: https://nimble.directory/packages.xml and https://github.com/nim-lang/packages | 0 |
-| number of packages | 1296 | 670 | 1 |
+| number of packages (as of 2018/07/13) | 1346 (http://code.dlang.org/) | 704 ( `nimble list | grep '\burl:' | wc -l`) | 1 |
 | **tooling** |
-| format code | `dfmt --inplace` | nimpretty, not yet ready: https://github.com/nim-lang/Nim/issues/7420 | 1 |
-| code reduction for bugs | dustmite | ? | 1 |
+| format code | `dfmt --inplace` | `nimpretty`, not yet ready: https://github.com/nim-lang/Nim/issues/7420 | 1 |
+| code reduction for bugs | dustmite | pending https://github.com/nim-lang/Nim/issues/8276 | 1 |
 | REPL | https://github.com/dlang-community/drepl ; https://github.com/callumenator/dabble |  unofficially, you can use `nim secret` but it does not support a lot of things. The most promising is [nrpl](https://github.com/wheineman/nrpl) | ? |
 | **implementation** |
 | GC | single shared memory heap that is controlled by its GC, thread safe, fully conservative, stop-the-world | precise, thread-local heaps, a bit more deterministic and a lot faster, you can even timeframe it if you need consistent 60fps for example. Much better GC implementation for soft real-time applications because it can be paused or the max pause can be tuned. Default GC is not thread safe. GC implementation can be switched at compile-time between deferred reference counting with cycle detection (default), mark and sweep, boehm or no GC (memory regions). Untraced heap-allocated manually managed objects are available (nim distinguishes bw ref and ptr: traced references point to objects of a garbage collected heap, untraced references point to manually allocated objects or to objects somewhere else in memory) | -1 |
