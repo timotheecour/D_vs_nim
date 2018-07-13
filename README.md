@@ -41,7 +41,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | forward declarations allowed? | yes | no; see https://github.com/nim-lang/Nim/issues/5287 | 1 |
 | User defined operators | partial: opCall opSlice, opAssign etc | yes | -1 |
 | User defined attributes | yes | ? | ? |
-| RAII | yes | no? see: [RAII](https://forum.nim-lang.org/t/362/1) | 1 |
+| RAII | yes (modulo caveats https://github.com/timotheecour/D_vs_nim/issues/27) | no, see: [RAII](https://forum.nim-lang.org/t/362/1) | 1 |
 | **debugging** |
 | **maturity** |
 | stability | few breaking changes in each release | pre 1.0, new releases often make lots of break changes | 1 |
