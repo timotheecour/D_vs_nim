@@ -128,18 +128,18 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | category | D | nim | 
 | --- | --- | --- |
 | **syntax:lexical** |
-| nesting block comments | /++/ | #[ ]# |
-| documentation comments | `/** */`` or `/++ +/` or `///` | `##` or `##[ ... ]##` |
-| WYSIWYG string | \`foo\nbar\`, r"foo\nbar", etc | """foo\nbar""", r"foo\nbar", etc(?) |
+| nesting block comments | `/+ +/` | `#[ ]#` |
+| documentation comments | `/** */` or `/++ +/` or `///` | `##` or `##[ ... ]##` |
+| WYSIWYG string | `` `foo\nbar` ``, `r"foo\nbar"`, etc. | `"""foo\nbar"""`, `r"foo\nbar"`, etc.(?) |
 | end of file (useful when debugging) | `__EOF__` | ? |
-| increment | i++ | i+=1 or inc(i) |
-| concatenation | ~ | & |
-| empty statement | {} | discard |
+| increment | `i++` | `i+=1` or `inc(i)` |
+| concatenation | `~` | `&` |
+| empty statement | `{}` | `discard` |
 | **syntax:parsing** |
 | alias | `alias T2=T;` | ?; template, see https://github.com/nim-lang/Nim/issues/7090 |
 | type alias | `alias T2=T;` | `type T2=T` |
 | string mixin | `mixin("1+1")` | `stringMixinLikeInD("1+1")` with: `macro stringMixinLikeInD(s: static[string]): untyped = parseStmt(s)` source: https://forum.nim-lang.org/t/1779/2#19060 |
-| UFCS | foo(a, b), a.foo(b) | foo(a, b), a.foo(b), a.foo b, foo a, b |
+| UFCS | `foo(a, b)`, `a.foo(b)` | `foo(a, b)`, `a.foo(b)`, `a.foo b`, `foo a, b` |
 | expr without parenthesis | `auto a=fun;` calls `fun` | `var a=fun` returns `fun` |
 | UFCS expr without parenthesis | `auto a=b.fun;` calls `fun` | `var a=b.fun` calls `fun` (when b is arg, not module) |
 | static if .. else if .. else| `static if(foo1) bar1 else if(foo2) bar2 else bar3` | `when foo1: bar1 elif foo2:bar2 else:bar3`  |
