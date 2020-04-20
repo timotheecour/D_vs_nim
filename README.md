@@ -42,6 +42,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | User defined operators | partial: opCall opSlice, opAssign etc | yes | -1 |
 | User defined attributes | yes | ? | ? |
 | RAII | yes (modulo caveats https://github.com/timotheecour/D_vs_nim/issues/27) | no, see: [RAII](https://forum.nim-lang.org/t/362/1) | 1 |
+| prevention of null dereferencing | <p>manual null checks required</p> <p>`null` pointers to class objects can exist. The only way to check for them is to remember to use `if (myObj is null)`. Lessening the impact of this, many built-in types, such as integers, fixed-size arrays, maps, and struct objects, can never throw `null` dereference errors, either by not being `null` or by treating `null` values as empty values ([source](https://w0rp.com/blog/post/null-and-d-programming-language/)).</p> | <p>manual null checks required</p> <p>`nil` references and pointers can exist. The standard way to check for them is to remember to use `if myObj == nil` or `if myObj.isNil`. Lessening the impact of this, many built-in types can never be `nil`, including `seq`s. Only `ptr` and `ref` types (and `cstring`s) can be `nil`.</p> <p>Nim also has an experimental `notnil` feature that enables a [`not nil` type annotation](https://nim-lang.org/docs/manual.html#types-not-nil-annotation), e.g. `ref SomeObject not nil`, to ensure that a variable can never hold `nil`. This feature was made experimental [in 2018](https://github.com/nim-lang/Nim/blob/devel/changelogs/changelog_0_19_0.md#changes-affecting-backwards-compatibility).</p> | ? |
 | **debugging** |
 | **maturity** |
 | stability | few breaking changes in each release | pre 1.0, new releases often make lots of break changes | 1 |
@@ -135,6 +136,8 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | increment | `i++` | `i+=1` or `inc(i)` |
 | concatenation | `~` | `&` |
 | empty statement | `{}` | `discard` |
+| null pointer | `null` | `nil` |
+| checking for null | `if (myObj is null)` | `if myObj == nil` or `if myObj.isNil` |
 | **syntax:parsing** |
 | alias | `alias T2=T;` | ?; template, see https://github.com/nim-lang/Nim/issues/7090 |
 | type alias | `alias T2=T;` | `type T2=T` |
@@ -198,6 +201,7 @@ See also https://github.com/timotheecour/D_vs_nim/issues/11
 | static assert | `static assert(foo);` | `static: assert foo` |
 | **library** |
 | universal type conversion | a.to!T | no: https://github.com/nim-lang/Nim/issues/7430 |
+| option/maybe type | [`Nullable`](https://dlang.org/phobos/std_typecons.html#.Nullable) in `std.typecons` | [`Option`](https://nim-lang.org/docs/options.html) in the `options` module |
 | path append | a.buildPath(b) | a / b ; does right thing on windows; NOTE: if b is absolute, buildPath returns b unlike nim |
 | **cmd line** |
 | custom define | -version=foo | --define:foo or --define:foo=bar |
