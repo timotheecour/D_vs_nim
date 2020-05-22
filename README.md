@@ -11,7 +11,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | category | D | nim | 1 for D, -1 for nim |
 | --- | --- | --- | --- |
 | **UFCS** |
-| UFCS supported everywhere | not everywhere, eg: mixin(expr), typeof(expr) | yes | -1 |
+| UFCS supported everywhere | not everywhere, eg: mixin(expr), typeof(expr), local symbols | (called UFCS or MCS in nim) not for `cast`, not for templates/macros with untyped, see https://nim-lang.github.io/Nim/manual.html#templates-limitations-of-the-method-call-syntax |  |
 | **tuple** |
 | tuple unpacking | no | yes:`proc getTup(): auto = (4, "foo"); let (_, a) = getTup()` | -1 |
 | **CTFE** |
