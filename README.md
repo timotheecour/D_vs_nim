@@ -45,7 +45,7 @@ Help welcome, eg by filling in the entries with `?` `TODO` and `CHECKME`, correc
 | prevention of null dereferencing | <p>manual null checks required</p> <p>`null` pointers to class objects can exist. The only way to check for them is to remember to use `if (myObj is null)`. Lessening the impact of this, many built-in types, such as integers, fixed-size arrays, maps, and struct objects, can never throw `null` dereference errors, either by not being `null` or by treating `null` values as empty values ([source](https://w0rp.com/blog/post/null-and-d-programming-language/)).</p> | <p>manual null checks required</p> <p>`nil` references and pointers can exist. The standard way to check for them is to remember to use `if myObj == nil` or `if myObj.isNil`. Lessening the impact of this, many built-in types can never be `nil`, including `seq`s. Only `ptr` and `ref` types (and `cstring`s) can be `nil`.</p> <p>Nim also has an experimental `notnil` feature that enables a [`not nil` type annotation](https://nim-lang.org/docs/manual.html#types-not-nil-annotation), e.g. `ref SomeObject not nil`, to ensure that a variable can never hold `nil`. This feature was made experimental [in 2018](https://github.com/nim-lang/Nim/blob/devel/changelogs/changelog_0_19_0.md#changes-affecting-backwards-compatibility).</p> | ? |
 | **debugging** |
 | **maturity** |
-| stability | few breaking changes in each release | pre 1.0, new releases often make lots of break changes | 1 |
+| stability | few breaking changes in each release | few breaking changes in each release  | 0 |
 | community | larger |  | 1 |
 | **interop** |
 | C++ | Calpypso (ldc fork) allows direct C++ integration |  | 1 |
